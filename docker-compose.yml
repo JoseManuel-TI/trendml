@@ -1,0 +1,73 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: trendml-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-trendml}
+      POSTGRES_USER: ${POSTGRES_USER:-trendml}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-trendml}
+    ports:
+      - "5432:5432"
+    volumes:
+      - trendml_pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: trendml-backend
+    environment:
+      APP_NAME: TrendML API
+      APP_ENV: development
+      APP_SECRET: ${APP_SECRET:-change-me}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 120
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-trendml}:${POSTGRES_PASSWORD:-trendml}@postgres:5432/${POSTGRES_DB:-trendml}
+      ML_SITE: ${ML_SITE:-MLA}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+      BACKEND_PUBLIC_URL: ${BACKEND_PUBLIC_URL:-http://localhost:8000}
+      MERCADOPAGO_ACCESS_TOKEN: ${MERCADOPAGO_ACCESS_TOKEN:-}
+      MERCADOPAGO_WEBHOOK_SECRET: ${MERCADOPAGO_WEBHOOK_SECRET:-}
+      EMAIL_PROVIDER: ${EMAIL_PROVIDER:-console}
+      EMAIL_FROM: ${EMAIL_FROM:-TrendML <noreply@trendml.app>}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+      INTERNAL_CRON_TOKEN: ${INTERNAL_CRON_TOKEN:-dev-internal-token}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    container_name: trendml-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
+    container_name: trendml-worker
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-trendml}:${POSTGRES_PASSWORD:-trendml}@postgres:5432/${POSTGRES_DB:-trendml}
+      ML_SITE: ${ML_SITE:-MLA}
+      ML_QUERIES: ${ML_QUERIES:-notebook,auriculares,mouse gamer}
+      BACKEND_INTERNAL_URL: ${BACKEND_INTERNAL_URL:-http://backend:8000}
+      INTERNAL_CRON_TOKEN: ${INTERNAL_CRON_TOKEN:-dev-internal-token}
+    depends_on:
+      - postgres
+      - backend
+
+volumes:
+  trendml_pgdata:
