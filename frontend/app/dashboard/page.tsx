@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { LineChart } from "@/components/LineChart";
 import { StatCard } from "@/components/StatCard";
-import { apiGet } from "@/lib/api";
+import { apiGet, apiPost } from "@/lib/api";
 
 type User = {
   id: number;
@@ -106,6 +106,7 @@ export default function DashboardPage() {
   const [sellers, setSellers] = useState<Seller[]>([]);
   const [funnel, setFunnel] = useState<Funnel | null>(null);
   const [pendingLeads, setPendingLeads] = useState<PendingLeadsResponse | null>(null);
+  const [mlConnected, setMlConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -155,6 +156,13 @@ export default function DashboardPage() {
         } catch {
           setPendingLeads(null);
         }
+
+        try {
+          await apiGet("/api/auth/ml/token-info");
+          setMlConnected(true);
+        } catch {
+          setMlConnected(false);
+        }
       } catch {
         setError("No autorizado. Inicia sesión para ver el dashboard.");
       } finally {
@@ -198,7 +206,34 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-semibold">Dashboard</h1>
           <p className="text-slate-600">Plan actual: <strong>{planLabel}</strong></p>
         </div>
-        <Link href="/pricing" className="rounded-xl bg-brand-500 text-white px-4 py-2 hover:bg-brand-700">Mejorar plan</Link>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-sm">
+            <span className={`inline-block h-2.5 w-2.5 rounded-full ${mlConnected ? "bg-emerald-500" : "bg-slate-300"}`} />
+            <span className="text-slate-600">ML {mlConnected ? "Conectado" : "Desconectado"}</span>
+          </div>
+          {mlConnected ? (
+            <button
+              className="rounded-xl border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-100"
+              onClick={async () => {
+                await apiPost("/api/auth/ml/disconnect", {});
+                setMlConnected(false);
+              }}
+            >
+              Desconectar
+            </button>
+          ) : (
+            <button
+              className="rounded-xl bg-yellow-500 text-white px-3 py-1.5 text-sm hover:bg-yellow-600"
+              onClick={async () => {
+                const { url } = await apiGet<{ url: string }>("/api/auth/ml/login");
+                window.location.href = url;
+              }}
+            >
+              Conectar ML
+            </button>
+          )}
+          <Link href="/pricing" className="rounded-xl bg-brand-500 text-white px-4 py-2 hover:bg-brand-700">Mejorar plan</Link>
+        </div>
       </section>
 
       <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

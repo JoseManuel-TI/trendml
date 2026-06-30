@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, UniqueConstraint
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -16,6 +16,8 @@ class User(Base):
     subscription_plan: Mapped[str] = mapped_column(String(50), default="starter")
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+    ml_tokens: Mapped[list["MLToken"]] = relationship(back_populates="user", cascade="all, delete-orphan")
 
 
 class Product(Base):
@@ -68,3 +70,17 @@ class CheckoutAttempt(Base):
     status: Mapped[str] = mapped_column(String(20), default="pending", index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
     reminder_sent_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+
+
+class MLToken(Base):
+    __tablename__ = "ml_tokens"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), unique=True, index=True)
+    access_token: Mapped[str] = mapped_column(Text)
+    refresh_token: Mapped[str] = mapped_column(Text, default="")
+    expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    user: Mapped["User"] = relationship(back_populates="ml_tokens")

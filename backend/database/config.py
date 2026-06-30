@@ -29,6 +29,8 @@ class Settings(BaseModel):
     smtp_password: str = os.getenv("SMTP_PASSWORD", "")
     smtp_use_tls: bool = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
     internal_cron_token: str = os.getenv("INTERNAL_CRON_TOKEN", "dev-internal-token")
+    ml_client_id: str = os.getenv("ML_CLIENT_ID", "")
+    ml_client_secret: str = os.getenv("ML_CLIENT_SECRET", "")
 
 
 settings = Settings()

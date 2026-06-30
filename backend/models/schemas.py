@@ -59,3 +59,10 @@ class TopSellerItem(BaseModel):
     seller_id: str
     total_products: int
     avg_sales: float
+
+
+class MLTokenResponse(BaseModel):
+    is_connected: bool
+    has_refresh_token: bool
+    expires_at: Optional[datetime] = None
+    user_id: int
