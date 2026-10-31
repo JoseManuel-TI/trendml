@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from database.session import engine, get_db
 from database.config import settings
-from models.entities import Product, PriceHistory, TrendSnapshot
+from models.entities import Product, PriceHistory, TrendSnapshot, WeeklyPrediction
 from sqlalchemy.orm import Session
 
 REAL_CATEGORIES = [
@@ -42,6 +42,7 @@ PRICE_RANGES = {
 }
 
 def seed_demo(db: Session):
+    db.query(WeeklyPrediction).delete()
     db.query(TrendSnapshot).delete()
     db.query(PriceHistory).delete()
     db.query(Product).delete()
@@ -82,6 +83,7 @@ def seed_demo(db: Session):
                     review_count=random.randint(0, 50),
                     score=round(random.uniform(3.0, 5.0), 1),
                     captured_at=day,
+                    data_source="synthetic",
                 )
                 db.add(ph)
 

@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict, Field
 
 
 class RegisterRequest(BaseModel):
     email: EmailStr
-    password: str
+    password: str = Field(min_length=8, max_length=128)
     phone: Optional[str] = None
 
 
@@ -48,10 +48,13 @@ class PriceAlertItem(BaseModel):
 
 
 class PredictionItem(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
     product_id: str
     title: str
-    predicted_sales_next_week: float
-    current_sales: int
+    predicted_sales_next_week: Optional[float]
+    status: str
+    horizon_days: int
+    model_version: str
     captured_at: datetime
 
 

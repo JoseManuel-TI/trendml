@@ -20,7 +20,7 @@ export async function apiGet<T>(path: string): Promise<T> {
   });
 
   if (!res.ok) {
-    throw new Error(`API request failed: ${res.status}`);
+    throw new Error(await errorMessage(res));
   }
 
   return res.json();
@@ -43,9 +43,15 @@ export async function apiPost<T>(path: string, body: object): Promise<T> {
   });
 
   if (!res.ok) {
-    const details = await res.text();
-    throw new Error(details || `API request failed: ${res.status}`);
+    throw new Error(await errorMessage(res));
   }
 
   return res.json();
+}
+
+async function errorMessage(res: Response): Promise<string> {
+  if (res.status === 401) return "Sesión inválida o vencida. Inicia sesión nuevamente.";
+  if (res.status === 403) return "No tienes permisos para esta función. Inicia sesión y revisa tu plan.";
+  const body = await res.json().catch(() => null);
+  return typeof body?.detail === "string" ? body.detail : `No se pudo completar la solicitud (${res.status}).`;
 }

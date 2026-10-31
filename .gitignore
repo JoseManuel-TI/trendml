@@ -17,3 +17,8 @@ node_modules/
 
 # OS
 .DS_Store
+
+# Local audit logs and validation copies
+work/
+
+.next-check/

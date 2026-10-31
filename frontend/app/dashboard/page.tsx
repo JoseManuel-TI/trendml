@@ -1,10 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-import { LineChart } from "@/components/LineChart";
 import { StatCard } from "@/components/StatCard";
 import { apiGet, apiPost } from "@/lib/api";
 
@@ -32,8 +30,11 @@ type PriceAlert = {
 type Prediction = {
   product_id: string;
   title: string;
-  predicted_sales_next_week: number;
-  current_sales: number;
+  predicted_sales_next_week: number | null;
+  status: string;
+  horizon_days: number;
+  model_version: string;
+  captured_at: string;
 };
 
 type Seller = {
@@ -42,70 +43,14 @@ type Seller = {
   avg_sales: number;
 };
 
-type Funnel = {
-  window_days: number;
-  checkouts_started: number;
-  payments_approved: number;
-  payments_pending: number;
-  recovered_after_reminder: number;
-  conversion_rate_pct: number;
-  recovered_rate_pct: number;
-  estimated_mrr_ars: number;
-  approved_by_plan: {
-    starter: number;
-    pro: number;
-    premium: number;
-  };
-};
-
-type PendingLead = {
-  user_id: number;
-  email: string;
-  phone: string | null;
-  plan: "starter" | "pro" | "premium";
-  provider: string;
-  checkout_url: string | null;
-  created_at: string;
-  hours_pending: number;
-  reminder_sent: boolean;
-};
-
-type PendingLeadsResponse = {
-  total: number;
-  leads: PendingLead[];
-  captured_at: string;
-};
-
-function normalizeWhatsAppNumber(raw: string): string {
-  const digits = raw.replace(/\D/g, "");
-  if (!digits) return "";
-  if (digits.startsWith("54")) return digits;
-  if (digits.length === 10) return `549${digits}`;
-  return digits;
-}
-
-function buildWhatsAppLink(lead: PendingLead): string {
-  const number = normalizeWhatsAppNumber(lead.phone || "");
-  if (!number) return "";
-  const message = [
-    `Hola ${lead.email}, soy de TrendML.`,
-    `Veo que dejaste pendiente el plan ${lead.plan.toUpperCase()}.`,
-    `Si quieres te ayudo a activarlo ahora.`,
-    lead.checkout_url ? `Link de pago: ${lead.checkout_url}` : "",
-  ].join("\n");
-
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-}
-
 export default function DashboardPage() {
-  const params = useSearchParams();
   const [user, setUser] = useState<User | null>(null);
   const [trending, setTrending] = useState<Trending[]>([]);
   const [alerts, setAlerts] = useState<PriceAlert[]>([]);
   const [predictions, setPredictions] = useState<Prediction[]>([]);
+  const [predictionError, setPredictionError] = useState("");
   const [sellers, setSellers] = useState<Seller[]>([]);
-  const [funnel, setFunnel] = useState<Funnel | null>(null);
-  const [pendingLeads, setPendingLeads] = useState<PendingLeadsResponse | null>(null);
+  const [alertError, setAlertError] = useState("");
   const [mlConnected, setMlConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -125,14 +70,16 @@ export default function DashboardPage() {
         try {
           const alertsData = await apiGet<PriceAlert[]>("/api/price-alerts");
           setAlerts(alertsData);
-        } catch {
+        } catch (cause) {
+          setAlertError(cause instanceof Error ? cause.message : "Error al consultar alertas");
           setAlerts([]);
         }
 
         try {
           const predictionsData = await apiGet<Prediction[]>("/api/predictions");
           setPredictions(predictionsData);
-        } catch {
+        } catch (cause) {
+          setPredictionError(cause instanceof Error ? cause.message : "Error de predicciones");
           setPredictions([]);
         }
 
@@ -144,27 +91,13 @@ export default function DashboardPage() {
         }
 
         try {
-          const funnelData = await apiGet<Funnel>("/api/admin/funnel");
-          setFunnel(funnelData);
-        } catch {
-          setFunnel(null);
-        }
-
-        try {
-          const leadsData = await apiGet<PendingLeadsResponse>("/api/admin/pending-leads");
-          setPendingLeads(leadsData);
-        } catch {
-          setPendingLeads(null);
-        }
-
-        try {
           await apiGet("/api/auth/ml/token-info");
           setMlConnected(true);
         } catch {
           setMlConnected(false);
         }
-      } catch {
-        setError("No autorizado. Inicia sesión para ver el dashboard.");
+      } catch (cause) {
+        setError(cause instanceof Error ? cause.message : "No se pudo cargar el dashboard.");
       } finally {
         setLoading(false);
       }
@@ -195,12 +128,6 @@ export default function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 space-y-8">
-      {params.get("upgraded") === "1" ? (
-        <p className="rounded-xl bg-emerald-50 text-emerald-700 px-4 py-3 border border-emerald-200">
-          Plan actualizado correctamente.
-        </p>
-      ) : null}
-
       <section className="flex items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold">Dashboard</h1>
@@ -225,8 +152,10 @@ export default function DashboardPage() {
             <button
               className="rounded-xl bg-yellow-500 text-white px-3 py-1.5 text-sm hover:bg-yellow-600"
               onClick={async () => {
-                const { url } = await apiGet<{ url: string }>("/api/auth/ml/login");
-                window.location.href = url;
+                try {
+                  const { url } = await apiGet<{ url: string }>("/api/auth/ml/login");
+                  window.location.href = url;
+                } catch (cause) {setError(cause instanceof Error ? cause.message : "No se pudo conectar");}
               }}
             >
               Conectar ML
@@ -236,6 +165,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      <p className="rounded-xl bg-amber-50 p-4">Catálogo compartido de demostración académica. Los productos DEMO utilizan datos sintéticos, no ventas reales de Mercado Libre. <Link href="/forecast" className="underline">Probar el modelo con datos históricos UCI</Link>.</p>
       <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Trending" value={`${trending.length}`} subtitle="Disponible en todos los planes" />
         <StatCard title="Price Alerts" value={`${alerts.length}`} subtitle="Pro y Premium" />
@@ -245,22 +175,37 @@ export default function DashboardPage() {
 
       <section className="card p-6">
         <h2 className="text-xl font-semibold">Predicción de ventas</h2>
-        {predictions.length === 0 ? (
-          <p className="mt-4 text-slate-600">Función bloqueada para tu plan. <Link className="text-brand-700 underline" href="/pricing">Actualizar ahora</Link>.</p>
+        <p className="mt-2 text-sm text-slate-600">
+          Incremento estimado de unidades en los próximos 7 días. El resultado no garantiza ventas.
+        </p>
+        {user?.subscription_plan === "starter" ? (
+          <p className="mt-4">Disponible en Pro y Premium.</p>
+        ) : predictionError ? (
+          <p className="mt-4 text-red-600">No se pudo consultar el modelo. Reintenta recargando la página.</p>
+        ) : predictions.length === 0 ? (
+          <p className="mt-4">Todavía no hay resultados procesados con el modelo semanal.</p>
         ) : (
-          <div className="mt-4">
-            <LineChart
-              labels={predictions.slice(0, 10).map((item) => item.title.slice(0, 20))}
-              values={predictions.slice(0, 10).map((item) => item.predicted_sales_next_week)}
-              label="Ventas estimadas"
-            />
-          </div>
+          <table className="w-full mt-4 text-sm">
+            <thead><tr className="text-left"><th>Producto</th><th>Unidades en 7 días</th><th>Observación</th></tr></thead>
+            <tbody>{predictions.map(item => (
+              <tr key={item.product_id} className="border-b border-slate-100">
+                <td className="py-2">{item.title}</td>
+                <td>{item.status === "available" && item.predicted_sales_next_week !== null
+                  ? item.predicted_sales_next_week.toFixed(1)
+                  : item.status === "unverified_data" ? "Datos demo o sin procedencia verificada"
+                  : item.status === "model_error" ? "Modelo no disponible"
+                  : "Sin historial suficiente"}</td>
+                <td>{new Date(item.captured_at + (item.captured_at.endsWith("Z") ? "" : "Z")).toLocaleString()}</td>
+              </tr>
+            ))}</tbody>
+          </table>
         )}
       </section>
 
       <section className="grid lg:grid-cols-2 gap-6">
         <div className="card p-6 overflow-x-auto">
           <h3 className="text-lg font-semibold">Productos tendencia</h3>
+          {trending.length === 0 && <p className="mt-3">No hay tendencias disponibles.</p>}
           <table className="w-full mt-4 text-sm">
             <thead>
               <tr className="text-left border-b border-slate-200">
@@ -283,9 +228,9 @@ export default function DashboardPage() {
 
         <div className="card p-6 overflow-x-auto">
           <h3 className="text-lg font-semibold">Alertas de precio</h3>
-          {alerts.length === 0 ? (
+          {user?.subscription_plan === "starter" ? (
             <p className="mt-3 text-slate-600">Función Pro/Premium. <Link className="text-brand-700 underline" href="/pricing">Desbloquear</Link>.</p>
-          ) : (
+          ) : alertError ? <p role="alert" className="mt-3 text-red-600">{alertError}</p> : alerts.length === 0 ? <p className="mt-3">No se detectaron bajas de precio comparables.</p> : (
             <table className="w-full mt-4 text-sm">
               <thead>
                 <tr className="text-left border-b border-slate-200">
@@ -308,102 +253,6 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="card p-6">
-        <h3 className="text-lg font-semibold">Revenue Funnel (30 días)</h3>
-        {!funnel ? (
-          <p className="mt-3 text-slate-600">
-            Disponible en plan Premium. <Link className="text-brand-700 underline" href="/pricing">Desbloquear</Link>.
-          </p>
-        ) : (
-          <div className="mt-4 space-y-5">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-              <StatCard title="Checkouts" value={`${funnel.checkouts_started}`} subtitle="Iniciados" />
-              <StatCard title="Aprobados" value={`${funnel.payments_approved}`} subtitle="Pagos exitosos" />
-              <StatCard title="Recuperados" value={`${funnel.recovered_after_reminder}`} subtitle="Por reminder 24h" />
-              <StatCard title="Conversión" value={`${funnel.conversion_rate_pct}%`} subtitle="Aprobados / iniciados" />
-              <StatCard title="MRR Est." value={`$${funnel.estimated_mrr_ars.toLocaleString()} ARS`} subtitle="Base 30 días" />
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-left border-b border-slate-200">
-                    <th className="py-2">Plan</th>
-                    <th>Pagos aprobados</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-slate-100">
-                    <td className="py-2">Starter</td>
-                    <td>{funnel.approved_by_plan.starter}</td>
-                  </tr>
-                  <tr className="border-b border-slate-100">
-                    <td className="py-2">Pro</td>
-                    <td>{funnel.approved_by_plan.pro}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">Premium</td>
-                    <td>{funnel.approved_by_plan.premium}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-      </section>
-
-      <section className="card p-6">
-        <h3 className="text-lg font-semibold">Leads Pendientes (Cierre Manual)</h3>
-        {!pendingLeads ? (
-          <p className="mt-3 text-slate-600">
-            Disponible en plan Premium. <Link className="text-brand-700 underline" href="/pricing">Desbloquear</Link>.
-          </p>
-        ) : pendingLeads.total === 0 ? (
-          <p className="mt-3 text-slate-600">No hay checkouts pendientes de más de 2 horas.</p>
-        ) : (
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-left border-b border-slate-200">
-                  <th className="py-2">Email</th>
-                  <th>WhatsApp</th>
-                  <th>Plan</th>
-                  <th>Horas pendiente</th>
-                  <th>Reminder</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pendingLeads.leads.slice(0, 20).map((lead) => (
-                  <tr key={`${lead.user_id}-${lead.created_at}`} className="border-b border-slate-100">
-                    <td className="py-2">{lead.email}</td>
-                    <td>{lead.phone || "-"}</td>
-                    <td>{lead.plan.toUpperCase()}</td>
-                    <td>{lead.hours_pending}h</td>
-                    <td>{lead.reminder_sent ? "Sí" : "No"}</td>
-                    <td className="space-x-3">
-                      <a className="text-brand-700 underline" href={`mailto:${lead.email}?subject=Tu plan TrendML ${lead.plan.toUpperCase()}&body=Hola, te ayudo a activar tu plan ahora mismo.`}>
-                        Email
-                      </a>
-                      {buildWhatsAppLink(lead) ? (
-                        <a className="text-emerald-700 underline" href={buildWhatsAppLink(lead)} target="_blank" rel="noreferrer">
-                          WhatsApp
-                        </a>
-                      ) : (
-                        <span className="text-slate-400">Sin WhatsApp</span>
-                      )}
-                      {lead.checkout_url ? (
-                        <a className="text-slate-800 underline" href={lead.checkout_url} target="_blank" rel="noreferrer">
-                          Link pago
-                        </a>
-                      ) : null}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
     </main>
   );
 }

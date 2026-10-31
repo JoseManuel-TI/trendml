@@ -3,12 +3,12 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "TrendML - Inteligencia de mercado para Mercado Libre",
+  title: "TrendML · Análisis y predicción de ventas",
   description:
-    "Detecta productos tendencia, alertas de precio y predicciones de ventas para vendedores de Mercado Libre.",
+    "Demostración académica de análisis de productos y predicción histórica de ventas.",
   openGraph: {
     title: "TrendML",
-    description: "Market Intelligence para sellers de Mercado Libre",
+    description: "Análisis de productos y laboratorio histórico con IA",
     type: "website",
   },
 };

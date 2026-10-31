@@ -39,3 +39,10 @@ def require_plan(*allowed_plans: str):
         return user
 
     return _checker
+
+
+def require_admin(user: User = Depends(get_current_user)) -> User:
+    allowed = {email.strip().lower() for email in settings.admin_emails.split(",") if email.strip()}
+    if user.email.lower() not in allowed:
+        raise HTTPException(status_code=403, detail="Acceso administrativo requerido")
+    return user

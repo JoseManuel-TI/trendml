@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from auth.deps import get_current_user
 from database.session import get_db
+from database.config import settings
 from models.entities import User
 from payments.mercadopago_service import (
     PLAN_CATALOG,
@@ -39,6 +40,8 @@ def plans():
 
 @router.post("/checkout")
 def checkout(payload: UpdatePlanRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    if settings.academic_mode:
+        raise HTTPException(status_code=403, detail="Pagos y cambios de plan deshabilitados en la entrega académica")
     if payload.plan not in ALLOWED_PLANS:
         raise HTTPException(status_code=400, detail="Invalid plan")
 

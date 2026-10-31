@@ -6,6 +6,8 @@ load_dotenv()
 
 
 class Settings(BaseModel):
+    academic_mode: bool = os.getenv("ACADEMIC_MODE", "true").lower() == "true"
+    admin_emails: str = os.getenv("ADMIN_EMAILS", "")
     app_name: str = os.getenv("APP_NAME", "TrendML API")
     app_env: str = os.getenv("APP_ENV", "development")
     app_secret: str = os.getenv("APP_SECRET", "change-me")

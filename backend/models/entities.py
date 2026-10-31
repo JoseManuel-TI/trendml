@@ -43,6 +43,8 @@ class PriceHistory(Base):
     score: Mapped[float] = mapped_column(Float, default=0.0)
     captured_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
 
+    data_source: Mapped[str] = mapped_column(String(30), default="unknown", server_default="unknown")
+
     product: Mapped["Product"] = relationship(back_populates="history")
 
 
@@ -84,3 +86,14 @@ class MLToken(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user: Mapped["User"] = relationship(back_populates="ml_tokens")
+
+
+class WeeklyPrediction(Base):
+    __tablename__ = "weekly_predictions"
+    __table_args__ = (UniqueConstraint("product_id", "captured_at", name="uq_weekly_product_time"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    product_id: Mapped[str] = mapped_column(String(50), ForeignKey("products.id"), index=True)
+    predicted_increment: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    status: Mapped[str] = mapped_column(String(30))
+    model_version: Mapped[str] = mapped_column(String(50))
+    captured_at: Mapped[datetime] = mapped_column(DateTime, index=True)

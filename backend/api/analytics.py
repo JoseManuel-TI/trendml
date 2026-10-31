@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from auth.deps import get_current_user, require_plan
+from auth.deps import get_current_user, require_plan, require_admin
 from database.session import get_db
 from models.entities import User
 from models.schemas import PredictionItem, PriceAlertItem, TopSellerItem, TrendingItem
@@ -39,15 +39,15 @@ def top_sellers(_: User = Depends(require_plan("premium")), db: Session = Depend
 
 
 @router.get("/admin/metrics")
-def admin_metrics(_: User = Depends(require_plan("premium")), db: Session = Depends(get_db)):
+def admin_metrics(_: User = Depends(require_admin), db: Session = Depends(get_db)):
     return get_admin_metrics(db)
 
 
 @router.get("/admin/funnel")
-def admin_funnel(_: User = Depends(require_plan("premium")), db: Session = Depends(get_db)):
+def admin_funnel(_: User = Depends(require_admin), db: Session = Depends(get_db)):
     return get_admin_funnel(db)
 
 
 @router.get("/admin/pending-leads")
-def admin_pending_leads(_: User = Depends(require_plan("premium")), db: Session = Depends(get_db)):
+def admin_pending_leads(_: User = Depends(require_admin), db: Session = Depends(get_db)):
     return get_pending_checkout_leads(db)

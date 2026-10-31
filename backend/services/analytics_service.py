@@ -2,11 +2,13 @@ from datetime import datetime, timedelta
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from models.entities import CheckoutAttempt, PriceHistory, Product, TrendSnapshot, User
+from models.entities import CheckoutAttempt, PriceHistory, Product, TrendSnapshot, User, WeeklyPrediction
 from payments.mercadopago_service import PLAN_CATALOG
 
 
 def get_trending_products(db: Session):
+    latest = (db.query(TrendSnapshot.product_id, func.max(TrendSnapshot.captured_at).label("at"))
+              .group_by(TrendSnapshot.product_id).subquery())
     rows = (
         db.query(
             Product.id,
@@ -17,6 +19,7 @@ def get_trending_products(db: Session):
             TrendSnapshot.captured_at,
         )
         .join(TrendSnapshot, TrendSnapshot.product_id == Product.id)
+        .join(latest, (latest.c.product_id == Product.id) & (latest.c.at == TrendSnapshot.captured_at))
         .join(
             PriceHistory,
             (PriceHistory.product_id == Product.id)
@@ -57,7 +60,7 @@ def get_price_alerts(db: Session):
             continue
 
         current, previous = latest[0], latest[1]
-        if current.price < previous.price:
+        if previous.price > 0 and 0 <= current.price < previous.price:
             product = db.query(Product).filter(Product.id == product_id).first()
             diff_pct = ((previous.price - current.price) / previous.price) * 100 if previous.price else 0
             alerts.append(
@@ -76,42 +79,28 @@ def get_price_alerts(db: Session):
 
 
 def get_predictions(db: Session):
-    rows = (
-        db.query(
-            Product.id,
-            Product.title,
-            TrendSnapshot.predicted_sales_next_week,
-            PriceHistory.sold_quantity,
-            TrendSnapshot.captured_at,
-        )
-        .join(TrendSnapshot, TrendSnapshot.product_id == Product.id)
-        .join(
-            PriceHistory,
-            (PriceHistory.product_id == Product.id)
-            & (PriceHistory.captured_at == TrendSnapshot.captured_at),
-        )
-        .order_by(TrendSnapshot.predicted_sales_next_week.desc())
-        .limit(50)
-        .all()
-    )
-
-    return [
-        {
-            "product_id": row[0],
-            "title": row[1],
-            "predicted_sales_next_week": round(row[2], 2),
-            "current_sales": row[3],
-            "captured_at": row[4],
-        }
-        for row in rows
-    ]
+    latest = (db.query(WeeklyPrediction.product_id,
+                       func.max(WeeklyPrediction.captured_at).label("captured_at"))
+              .group_by(WeeklyPrediction.product_id).subquery())
+    rows = (db.query(WeeklyPrediction, Product)
+            .join(Product, Product.id == WeeklyPrediction.product_id)
+            .join(latest, (latest.c.product_id == WeeklyPrediction.product_id)
+                  & (latest.c.captured_at == WeeklyPrediction.captured_at))
+            .order_by(WeeklyPrediction.product_id).all())
+    return [{"product_id": product.id, "title": product.title,
+             "predicted_sales_next_week": (round(row.predicted_increment, 2)
+                                           if row.status == "available" and row.predicted_increment is not None
+                                           else None),
+             "status": row.status, "horizon_days": 7,
+             "model_version": row.model_version, "captured_at": row.captured_at}
+            for row, product in rows]
 
 
 def get_top_sellers(db: Session):
     rows = (
         db.query(
             Product.seller_id,
-            func.count(Product.id),
+            func.count(func.distinct(Product.id)),
             func.avg(PriceHistory.sold_quantity),
         )
         .join(PriceHistory, PriceHistory.product_id == Product.id)

@@ -25,8 +25,8 @@ export default function LoginPage() {
   async function loginAsDemo() {
     setError("");
     try {
-      const demoEmail = "seller1@example.com";
-      const demoPassword = "Password123!";
+      const demoEmail = "demo@example.com";
+      const demoPassword = "DemoTrendML123!";
       setEmail(demoEmail);
       setPassword(demoPassword);
       const data = await apiPost<{ access_token: string }>("/api/auth/login", {
@@ -36,7 +36,7 @@ export default function LoginPage() {
       setToken(data.access_token);
       router.push("/dashboard");
     } catch {
-      setError("No se pudo iniciar sesión demo. Ejecuta: bash scripts/seed_local.sh");
+      setError("No se pudo iniciar sesión demo. Ejecuta: bash scripts/start_academic.sh");
     }
   }
 

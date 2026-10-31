@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import {Suspense} from "react";
 import { useSearchParams } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export default function MlCallbackPage() {
+function MlCallbackContent() {
   const params = useSearchParams();
   const success = params.get("success");
   const error = params.get("error");
@@ -48,3 +49,5 @@ export default function MlCallbackPage() {
     </main>
   );
 }
+
+export default function MlCallbackPage(){return <Suspense fallback={<p>Cargando…</p>}><MlCallbackContent /></Suspense>;}

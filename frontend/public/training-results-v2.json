@@ -1,0 +1,2408 @@
+{
+  "version": "weekly-lags-v2",
+  "generated_at": "2026-10-14T10:19:05.045223+00:00",
+  "source": {
+    "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+    "doi": "10.24432/C5BW33",
+    "author": "Daqing Chen (2015)",
+    "license": "CC BY 4.0",
+    "currency": "GBP",
+    "historical": true,
+    "archive_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b"
+  },
+  "preparation": {
+    "raw_rows": 541909,
+    "duplicate_rows_removed": 5268,
+    "cancelled_rows": 9251,
+    "rows_excluded_after_deduplication": 14520,
+    "selection_cutoff": "2011-08-01",
+    "last_complete_day": "2011-12-08",
+    "target": "gross positive units; cancellations and returns excluded",
+    "zero_days": "No eligible sale in a complete transaction log; not a stock-availability claim",
+    "price": "quantity-weighted daily GBP price; forward fill only",
+    "neutral_features": "review_count and score are zero because source lacks them"
+  },
+  "features": [
+    "sales_7",
+    "sales_14",
+    "sales_28",
+    "daily_mean_28",
+    "daily_std_28",
+    "previous_week",
+    "weekly_change",
+    "price",
+    "price_change_7",
+    "month",
+    "weekday"
+  ],
+  "labels": {
+    "current": "Modelo actual (v1)",
+    "forest": "Random Forest v2",
+    "boosting": "Boosting v2",
+    "last_week": "Semana anterior",
+    "mean_4_weeks": "Promedio de cuatro semanas"
+  },
+  "validation": [
+    {
+      "cutoff": "2011-08-01",
+      "training_pairs": 2050,
+      "cases": [
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 912.0,
+          "predictions": {
+            "last_week": 677.0,
+            "mean_4_weeks": 862.75,
+            "current": 405.1,
+            "forest": 523.5988783677691,
+            "boosting": 418.29882634912565
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 251.0,
+          "predictions": {
+            "last_week": 912.0,
+            "mean_4_weeks": 576.0,
+            "current": 620.9,
+            "forest": 650.3296104075669,
+            "boosting": 832.0410095138548
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 60.0,
+          "predictions": {
+            "last_week": 251.0,
+            "mean_4_weeks": 546.5,
+            "current": 427.3,
+            "forest": 475.8892111634393,
+            "boosting": 474.69476672671067
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 60.0,
+          "predictions": {
+            "last_week": 60.0,
+            "mean_4_weeks": 475.0,
+            "current": 428.94,
+            "forest": 558.371964803207,
+            "boosting": 598.0091282712681
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 472.0,
+          "predictions": {
+            "last_week": 912.0,
+            "mean_4_weeks": 676.75,
+            "current": 953.06,
+            "forest": 610.612529588751,
+            "boosting": 585.5772955010681
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 362.0,
+          "predictions": {
+            "last_week": 472.0,
+            "mean_4_weeks": 535.0,
+            "current": 726.28,
+            "forest": 517.0008855292448,
+            "boosting": 527.023082218225
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 1644.0,
+          "predictions": {
+            "last_week": 362.0,
+            "mean_4_weeks": 552.5,
+            "current": 950.12,
+            "forest": 551.0896506549757,
+            "boosting": 531.2834040799972
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 435.0,
+          "predictions": {
+            "last_week": 1644.0,
+            "mean_4_weeks": 847.5,
+            "current": 865.88,
+            "forest": 523.2315773329182,
+            "boosting": 612.4389659216222
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 247.0,
+          "predictions": {
+            "last_week": 616.0,
+            "mean_4_weeks": 595.5,
+            "current": 1640.38,
+            "forest": 585.7606443724568,
+            "boosting": 482.35524342528197
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 227.0,
+          "predictions": {
+            "last_week": 247.0,
+            "mean_4_weeks": 637.75,
+            "current": 1644.5,
+            "forest": 482.6919987848102,
+            "boosting": 448.05471604952425
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 898.0,
+          "predictions": {
+            "last_week": 227.0,
+            "mean_4_weeks": 642.0,
+            "current": 1702.1,
+            "forest": 654.5432117744969,
+            "boosting": 584.8750596457754
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 852.0,
+          "predictions": {
+            "last_week": 898.0,
+            "mean_4_weeks": 497.0,
+            "current": 506.325,
+            "forest": 527.5219333350353,
+            "boosting": 469.5949454109803
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 2414.0,
+          "predictions": {
+            "last_week": 426.0,
+            "mean_4_weeks": 453.5,
+            "current": 496.78,
+            "forest": 428.7338203094427,
+            "boosting": 462.0428200823838
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 1578.0,
+          "predictions": {
+            "last_week": 2414.0,
+            "mean_4_weeks": 908.75,
+            "current": 686.58,
+            "forest": 429.9260046865621,
+            "boosting": 238.33304637836434
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 454.0,
+          "predictions": {
+            "last_week": 1578.0,
+            "mean_4_weeks": 1255.5,
+            "current": 674.72,
+            "forest": 537.7231766287265,
+            "boosting": 775.0880074209077
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 790.0,
+          "predictions": {
+            "last_week": 454.0,
+            "mean_4_weeks": 1218.0,
+            "current": 629.58,
+            "forest": 394.2610989080877,
+            "boosting": 379.5409192578208
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 1714.0,
+          "predictions": {
+            "last_week": 162.0,
+            "mean_4_weeks": 312.25,
+            "current": 757.82,
+            "forest": 540.5088624375702,
+            "boosting": 654.9051666666167
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 162.0,
+          "predictions": {
+            "last_week": 1714.0,
+            "mean_4_weeks": 720.5,
+            "current": 2464.26,
+            "forest": 549.9719213538287,
+            "boosting": 736.8003619064236
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 176.0,
+          "predictions": {
+            "last_week": 162.0,
+            "mean_4_weeks": 722.25,
+            "current": 2187.78,
+            "forest": 580.6545380768576,
+            "boosting": 513.4594271368555
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 362.0,
+          "predictions": {
+            "last_week": 176.0,
+            "mean_4_weeks": 553.5,
+            "current": 2187.78,
+            "forest": 565.6215856984679,
+            "boosting": 519.4915435747994
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 101.0,
+          "predictions": {
+            "last_week": 389.0,
+            "mean_4_weeks": 187.75,
+            "current": 333.69449999999995,
+            "forest": 440.23466985881765,
+            "boosting": 212.25798054170966
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 68.0,
+          "predictions": {
+            "last_week": 101.0,
+            "mean_4_weeks": 193.25,
+            "current": 329.13449999999995,
+            "forest": 314.53430314906564,
+            "boosting": 155.0682465713545
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 144.0,
+          "predictions": {
+            "last_week": 68.0,
+            "mean_4_weeks": 187.75,
+            "current": 333.69449999999995,
+            "forest": 328.09811321030065,
+            "boosting": 210.43285013966633
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 70.0,
+          "predictions": {
+            "last_week": 144.0,
+            "mean_4_weeks": 175.5,
+            "current": 333.69449999999995,
+            "forest": 339.6777173974119,
+            "boosting": 201.20856177671467
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 194.0,
+          "predictions": {
+            "last_week": 533.0,
+            "mean_4_weeks": 916.25,
+            "current": 819.48,
+            "forest": 746.8230090446706,
+            "boosting": 754.5403576000052
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 625.0,
+          "predictions": {
+            "last_week": 194.0,
+            "mean_4_weeks": 543.75,
+            "current": 819.48,
+            "forest": 756.279487129843,
+            "boosting": 992.6090399130871
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 432.0,
+          "predictions": {
+            "last_week": 625.0,
+            "mean_4_weeks": 592.0,
+            "current": 819.48,
+            "forest": 807.0711093460363,
+            "boosting": 1011.3213139171379
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 1008.0,
+          "predictions": {
+            "last_week": 432.0,
+            "mean_4_weeks": 446.0,
+            "current": 819.48,
+            "forest": 807.8901731804749,
+            "boosting": 1212.423929841165
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 3840.0,
+          "predictions": {
+            "last_week": 454.0,
+            "mean_4_weeks": 469.25,
+            "current": 656.84,
+            "forest": 464.67178773193405,
+            "boosting": 411.933454669334
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 1259.0,
+          "predictions": {
+            "last_week": 3840.0,
+            "mean_4_weeks": 1292.5,
+            "current": 486.3,
+            "forest": 519.7825584850715,
+            "boosting": 452.3277785025794
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 690.0,
+          "predictions": {
+            "last_week": 1259.0,
+            "mean_4_weeks": 1523.5,
+            "current": 471.14,
+            "forest": 523.6031954673288,
+            "boosting": 482.41653957543656
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 644.0,
+          "predictions": {
+            "last_week": 690.0,
+            "mean_4_weeks": 1560.75,
+            "current": 341.54,
+            "forest": 434.68477930265084,
+            "boosting": 491.0166487859873
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 1060.0,
+          "predictions": {
+            "last_week": 829.0,
+            "mean_4_weeks": 841.25,
+            "current": 635.3,
+            "forest": 735.4742046950323,
+            "boosting": 771.313290829823
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 1077.0,
+          "predictions": {
+            "last_week": 1060.0,
+            "mean_4_weeks": 772.5,
+            "current": 636.88,
+            "forest": 746.5427779319565,
+            "boosting": 675.6299132920797
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 1424.0,
+          "predictions": {
+            "last_week": 1077.0,
+            "mean_4_weeks": 921.75,
+            "current": 592.92,
+            "forest": 672.195731669232,
+            "boosting": 598.0372628028707
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 1288.0,
+          "predictions": {
+            "last_week": 1424.0,
+            "mean_4_weeks": 1097.5,
+            "current": 602.53,
+            "forest": 646.0292354556278,
+            "boosting": 734.072036557914
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-08-01",
+          "target_end": "2011-08-08",
+          "actual": 453.0,
+          "predictions": {
+            "last_week": 798.0,
+            "mean_4_weeks": 750.5,
+            "current": 742.28,
+            "forest": 587.4006804530587,
+            "boosting": 775.7997957070397
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-08-08",
+          "target_end": "2011-08-15",
+          "actual": 497.0,
+          "predictions": {
+            "last_week": 453.0,
+            "mean_4_weeks": 781.0,
+            "current": 742.84,
+            "forest": 539.6787531169834,
+            "boosting": 686.5294358840293
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-08-15",
+          "target_end": "2011-08-22",
+          "actual": 612.0,
+          "predictions": {
+            "last_week": 497.0,
+            "mean_4_weeks": 598.5,
+            "current": 744.14,
+            "forest": 496.9420777345402,
+            "boosting": 456.91747312472825
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-08-22",
+          "target_end": "2011-08-29",
+          "actual": 352.0,
+          "predictions": {
+            "last_week": 612.0,
+            "mean_4_weeks": 590.0,
+            "current": 752.88,
+            "forest": 588.1859628365836,
+            "boosting": 598.8587240782249
+          }
+        }
+      ],
+      "mae": {
+        "last_week": 572.725,
+        "mean_4_weeks": 504.38125,
+        "current": 702.486075,
+        "forest": 487.1960866788815,
+        "boosting": 514.6886299406215
+      },
+      "max_training_target": "2011-08-01"
+    },
+    {
+      "cutoff": "2011-09-01",
+      "training_pairs": 2360,
+      "cases": [
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 204.0,
+          "predictions": {
+            "last_week": 168.0,
+            "mean_4_weeks": 167.5,
+            "current": 276.96,
+            "forest": 492.92103057579567,
+            "boosting": 337.36326869185666
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 112.0,
+          "predictions": {
+            "last_week": 204.0,
+            "mean_4_weeks": 154.5,
+            "current": 721.2,
+            "forest": 354.00543917364337,
+            "boosting": 512.016264743349
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 93.0,
+          "predictions": {
+            "last_week": 112.0,
+            "mean_4_weeks": 133.0,
+            "current": 412.72,
+            "forest": 308.0048616400315,
+            "boosting": 342.6203897713616
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 30.0,
+          "predictions": {
+            "last_week": 93.0,
+            "mean_4_weeks": 144.25,
+            "current": 348.172,
+            "forest": 276.280532852882,
+            "boosting": 289.16405266583365
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 672.0,
+          "predictions": {
+            "last_week": 353.0,
+            "mean_4_weeks": 674.75,
+            "current": 936.328,
+            "forest": 537.2757703680111,
+            "boosting": 633.9731212098476
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 1258.0,
+          "predictions": {
+            "last_week": 672.0,
+            "mean_4_weeks": 764.25,
+            "current": 865.8942857142858,
+            "forest": 530.5221392053078,
+            "boosting": 489.7199414489524
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 978.0,
+          "predictions": {
+            "last_week": 1258.0,
+            "mean_4_weeks": 667.0,
+            "current": 404.173,
+            "forest": 595.3179333201156,
+            "boosting": 537.148570686985
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 393.0,
+          "predictions": {
+            "last_week": 978.0,
+            "mean_4_weeks": 815.25,
+            "current": 558.28,
+            "forest": 784.4447361407401,
+            "boosting": 979.3043075707902
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 306.0,
+          "predictions": {
+            "last_week": 61.0,
+            "mean_4_weeks": 526.75,
+            "current": 416.28,
+            "forest": 248.14268277844275,
+            "boosting": 225.2012595816384
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 1293.0,
+          "predictions": {
+            "last_week": 306.0,
+            "mean_4_weeks": 541.25,
+            "current": 335.82,
+            "forest": 544.0535137150887,
+            "boosting": 350.1247748692325
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 348.0,
+          "predictions": {
+            "last_week": 1293.0,
+            "mean_4_weeks": 641.5,
+            "current": 340.3,
+            "forest": 475.0893825790968,
+            "boosting": 632.679778656513
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 262.0,
+          "predictions": {
+            "last_week": 348.0,
+            "mean_4_weeks": 502.0,
+            "current": 332.7,
+            "forest": 587.2488541912633,
+            "boosting": 622.4940585979331
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 969.0,
+          "predictions": {
+            "last_week": 896.0,
+            "mean_4_weeks": 851.25,
+            "current": 831.2142857142858,
+            "forest": 700.0768761152185,
+            "boosting": 634.9290647749601
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 634.0,
+          "predictions": {
+            "last_week": 969.0,
+            "mean_4_weeks": 690.5,
+            "current": 925.22,
+            "forest": 613.6447118184248,
+            "boosting": 686.4631270930462
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 745.0,
+          "predictions": {
+            "last_week": 634.0,
+            "mean_4_weeks": 711.75,
+            "current": 673.7330000000001,
+            "forest": 604.5985426570955,
+            "boosting": 551.1885370710967
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 662.0,
+          "predictions": {
+            "last_week": 745.0,
+            "mean_4_weeks": 811.0,
+            "current": 815.14,
+            "forest": 649.6768363495652,
+            "boosting": 577.5158952954499
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 50.0,
+          "predictions": {
+            "last_week": 497.0,
+            "mean_4_weeks": 307.5,
+            "current": 1801.92,
+            "forest": 794.55480149569,
+            "boosting": 564.6575789479378
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 177.0,
+          "predictions": {
+            "last_week": 50.0,
+            "mean_4_weeks": 281.0,
+            "current": 1857.82,
+            "forest": 557.6275922543733,
+            "boosting": 429.52055154427813
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 177.0,
+          "predictions": {
+            "last_week": 177.0,
+            "mean_4_weeks": 281.5,
+            "current": 790.0333333333334,
+            "forest": 681.6730675415479,
+            "boosting": 632.7183842728134
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 740.0,
+          "predictions": {
+            "last_week": 177.0,
+            "mean_4_weeks": 225.25,
+            "current": 751.88,
+            "forest": 472.44931771553286,
+            "boosting": 914.8934275658771
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 124.0,
+          "predictions": {
+            "last_week": 46.0,
+            "mean_4_weeks": 74.75,
+            "current": 63.04,
+            "forest": 143.21597106459643,
+            "boosting": 229.0229892430693
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 25.0,
+          "predictions": {
+            "last_week": 124.0,
+            "mean_4_weeks": 92.25,
+            "current": 250.62766666666664,
+            "forest": 418.4056213810698,
+            "boosting": 354.9363148737088
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 117.0,
+          "predictions": {
+            "last_week": 25.0,
+            "mean_4_weeks": 68.0,
+            "current": 60.52166666666666,
+            "forest": 139.69594136745613,
+            "boosting": 220.98790060563874
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 80.0,
+          "predictions": {
+            "last_week": 117.0,
+            "mean_4_weeks": 78.0,
+            "current": 126.44166666666666,
+            "forest": 302.7329232053207,
+            "boosting": 235.52702892488796
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 384.0,
+          "predictions": {
+            "last_week": 338.0,
+            "mean_4_weeks": 576.75,
+            "current": 292.9142857142857,
+            "forest": 1215.7249076673488,
+            "boosting": 1377.5309809337805
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 1248.0,
+          "predictions": {
+            "last_week": 384.0,
+            "mean_4_weeks": 540.5,
+            "current": 292.9142857142857,
+            "forest": 796.6212078625994,
+            "boosting": 987.3716148652106
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 635.0,
+          "predictions": {
+            "last_week": 1248.0,
+            "mean_4_weeks": 756.5,
+            "current": 292.9142857142857,
+            "forest": 625.8007268242798,
+            "boosting": 679.1340348035545
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 765.0,
+          "predictions": {
+            "last_week": 635.0,
+            "mean_4_weeks": 651.25,
+            "current": 292.9142857142857,
+            "forest": 590.167201702174,
+            "boosting": 428.7524668731157
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 440.0,
+          "predictions": {
+            "last_week": 220.0,
+            "mean_4_weeks": 772.0,
+            "current": 719.18,
+            "forest": 572.313126333039,
+            "boosting": 454.54275699861313
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 936.0,
+          "predictions": {
+            "last_week": 440.0,
+            "mean_4_weeks": 500.25,
+            "current": 833.32,
+            "forest": 734.0505109035025,
+            "boosting": 756.4391164119795
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 688.0,
+          "predictions": {
+            "last_week": 936.0,
+            "mean_4_weeks": 660.75,
+            "current": 1019.08,
+            "forest": 702.9479219173405,
+            "boosting": 821.1739397440182
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 856.0,
+          "predictions": {
+            "last_week": 688.0,
+            "mean_4_weeks": 571.0,
+            "current": 1228.38,
+            "forest": 757.5650888882737,
+            "boosting": 857.7570584193018
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 661.0,
+          "predictions": {
+            "last_week": 567.0,
+            "mean_4_weeks": 1202.5,
+            "current": 885.16,
+            "forest": 802.1909858707312,
+            "boosting": 837.4765099962349
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 503.0,
+          "predictions": {
+            "last_week": 661.0,
+            "mean_4_weeks": 997.25,
+            "current": 667.54,
+            "forest": 663.4379017186418,
+            "boosting": 563.944635012751
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 1674.0,
+          "predictions": {
+            "last_week": 503.0,
+            "mean_4_weeks": 916.5,
+            "current": 675.84,
+            "forest": 688.702688536462,
+            "boosting": 777.1296138839435
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 1194.0,
+          "predictions": {
+            "last_week": 1674.0,
+            "mean_4_weeks": 851.25,
+            "current": 619.48,
+            "forest": 1280.5883540092022,
+            "boosting": 999.8173544013304
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-09-01",
+          "target_end": "2011-09-08",
+          "actual": 504.0,
+          "predictions": {
+            "last_week": 278.0,
+            "mean_4_weeks": 468.25,
+            "current": 388.14,
+            "forest": 722.6792555760672,
+            "boosting": 690.0908711464383
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-09-08",
+          "target_end": "2011-09-15",
+          "actual": 595.0,
+          "predictions": {
+            "last_week": 504.0,
+            "mean_4_weeks": 466.0,
+            "current": 805.82,
+            "forest": 716.7790311733402,
+            "boosting": 663.0173559637749
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-09-15",
+          "target_end": "2011-09-22",
+          "actual": 690.0,
+          "predictions": {
+            "last_week": 595.0,
+            "mean_4_weeks": 526.0,
+            "current": 867.08,
+            "forest": 646.0248057683281,
+            "boosting": 533.0770588851966
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-09-22",
+          "target_end": "2011-09-29",
+          "actual": 462.0,
+          "predictions": {
+            "last_week": 690.0,
+            "mean_4_weeks": 516.75,
+            "current": 993.02,
+            "forest": 691.7173693583374,
+            "boosting": 661.1429250882857
+          }
+        }
+      ],
+      "mae": {
+        "last_week": 290.4,
+        "mean_4_weeks": 230.21875,
+        "current": 372.5962321428571,
+        "forest": 269.6897263639783,
+        "boosting": 280.09480254041773
+      },
+      "max_training_target": "2011-09-01"
+    },
+    {
+      "cutoff": "2011-10-01",
+      "training_pairs": 2660,
+      "cases": [
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 721.0,
+          "predictions": {
+            "last_week": 30.0,
+            "mean_4_weeks": 106.5,
+            "current": 435.22,
+            "forest": 84.89309168696151,
+            "boosting": 169.85100056770352
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 224.0,
+          "predictions": {
+            "last_week": 721.0,
+            "mean_4_weeks": 227.0,
+            "current": 1245.04,
+            "forest": 330.6965670061752,
+            "boosting": 681.9137290990143
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 194.0,
+          "predictions": {
+            "last_week": 224.0,
+            "mean_4_weeks": 267.0,
+            "current": 2436.24,
+            "forest": 702.5558994194126,
+            "boosting": 438.3560727483198
+          }
+        },
+        {
+          "product_id": "UCI-15036",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 53.0,
+          "predictions": {
+            "last_week": 194.0,
+            "mean_4_weeks": 292.25,
+            "current": 1215.96,
+            "forest": 638.3429538302446,
+            "boosting": 431.1948917001442
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 476.0,
+          "predictions": {
+            "last_week": 359.0,
+            "mean_4_weeks": 780.25,
+            "current": 588.32,
+            "forest": 598.7075773698807,
+            "boosting": 546.7163897107691
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 487.0,
+          "predictions": {
+            "last_week": 476.0,
+            "mean_4_weeks": 743.75,
+            "current": 1208.86,
+            "forest": 649.6106781914366,
+            "boosting": 589.076042634068
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 500.0,
+          "predictions": {
+            "last_week": 487.0,
+            "mean_4_weeks": 585.5,
+            "current": 810.22,
+            "forest": 720.2924212900751,
+            "boosting": 928.8719709368412
+          }
+        },
+        {
+          "product_id": "UCI-21212",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 467.0,
+          "predictions": {
+            "last_week": 500.0,
+            "mean_4_weeks": 455.5,
+            "current": 946.68,
+            "forest": 1290.3822986260202,
+            "boosting": 1217.033704744543
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 879.0,
+          "predictions": {
+            "last_week": 210.0,
+            "mean_4_weeks": 515.5,
+            "current": 162.3,
+            "forest": 590.9125227639428,
+            "boosting": 667.7797356820193
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 248.0,
+          "predictions": {
+            "last_week": 879.0,
+            "mean_4_weeks": 659.5,
+            "current": 977.04,
+            "forest": 668.372391709949,
+            "boosting": 847.7108015332142
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 141.0,
+          "predictions": {
+            "last_week": 248.0,
+            "mean_4_weeks": 434.25,
+            "current": 1152.76,
+            "forest": 670.2405809480125,
+            "boosting": 644.8465088860404
+          }
+        },
+        {
+          "product_id": "UCI-21977",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 95.0,
+          "predictions": {
+            "last_week": 141.0,
+            "mean_4_weeks": 369.5,
+            "current": 645.34,
+            "forest": 520.4620917323748,
+            "boosting": 767.7440175804946
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 748.0,
+          "predictions": {
+            "last_week": 1648.0,
+            "mean_4_weeks": 857.0,
+            "current": 912.7,
+            "forest": 752.3493549240625,
+            "boosting": 834.837231310227
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 1004.0,
+          "predictions": {
+            "last_week": 748.0,
+            "mean_4_weeks": 934.5,
+            "current": 1425.92,
+            "forest": 741.4343210870126,
+            "boosting": 730.5990911002149
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 1158.0,
+          "predictions": {
+            "last_week": 1004.0,
+            "mean_4_weeks": 1027.5,
+            "current": 761.1160000000001,
+            "forest": 683.0481356595889,
+            "boosting": 622.3746255271371
+          }
+        },
+        {
+          "product_id": "UCI-22197",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 2650.0,
+          "predictions": {
+            "last_week": 1158.0,
+            "mean_4_weeks": 1139.5,
+            "current": 778.38,
+            "forest": 686.8846442663571,
+            "boosting": 589.1581994180657
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 525.0,
+          "predictions": {
+            "last_week": 607.0,
+            "mean_4_weeks": 286.0,
+            "current": 1358.42,
+            "forest": 637.5561858509858,
+            "boosting": 818.69988187169
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 53.0,
+          "predictions": {
+            "last_week": 525.0,
+            "mean_4_weeks": 401.75,
+            "current": 253.12400000000002,
+            "forest": 668.2403051247077,
+            "boosting": 1212.5445573390741
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 678.0,
+          "predictions": {
+            "last_week": 53.0,
+            "mean_4_weeks": 370.75,
+            "current": 293.66,
+            "forest": 293.24775398531864,
+            "boosting": 383.0120156639627
+          }
+        },
+        {
+          "product_id": "UCI-22616",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 293.0,
+          "predictions": {
+            "last_week": 678.0,
+            "mean_4_weeks": 465.75,
+            "current": 1217.82,
+            "forest": 654.5804395902136,
+            "boosting": 500.70582344130185
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 42.0,
+          "predictions": {
+            "last_week": 80.0,
+            "mean_4_weeks": 86.25,
+            "current": 95.48166666666668,
+            "forest": 85.29579911391397,
+            "boosting": 65.24263226403112
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 82.0,
+          "predictions": {
+            "last_week": 42.0,
+            "mean_4_weeks": 63.0,
+            "current": 94.86166666666668,
+            "forest": 122.92038084925939,
+            "boosting": 100.17453382992713
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 56.0,
+          "predictions": {
+            "last_week": 82.0,
+            "mean_4_weeks": 74.25,
+            "current": 95.48166666666668,
+            "forest": 96.48724863734014,
+            "boosting": 217.16615796148395
+          }
+        },
+        {
+          "product_id": "UCI-23166",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 42.0,
+          "predictions": {
+            "last_week": 56.0,
+            "mean_4_weeks": 65.0,
+            "current": 95.48166666666668,
+            "forest": 114.60969310991321,
+            "boosting": 46.20493820033521
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 845.0,
+          "predictions": {
+            "last_week": 1008.0,
+            "mean_4_weeks": 830.75,
+            "current": 916.66,
+            "forest": 648.0018120332076,
+            "boosting": 611.9624692054427
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 730.0,
+          "predictions": {
+            "last_week": 845.0,
+            "mean_4_weeks": 946.0,
+            "current": 966.42,
+            "forest": 681.8506310104567,
+            "boosting": 793.9117158661369
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 1071.0,
+          "predictions": {
+            "last_week": 730.0,
+            "mean_4_weeks": 780.5,
+            "current": 966.42,
+            "forest": 710.6221161058853,
+            "boosting": 877.8684698588673
+          }
+        },
+        {
+          "product_id": "UCI-84077",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 5328.0,
+          "predictions": {
+            "last_week": 1071.0,
+            "mean_4_weeks": 913.5,
+            "current": 919.16,
+            "forest": 719.5835571334791,
+            "boosting": 949.8735112380938
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 596.0,
+          "predictions": {
+            "last_week": 872.0,
+            "mean_4_weeks": 738.0,
+            "current": 1176.12,
+            "forest": 739.6517626059511,
+            "boosting": 788.0963765281823
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 369.0,
+          "predictions": {
+            "last_week": 596.0,
+            "mean_4_weeks": 771.0,
+            "current": 994.5,
+            "forest": 745.7221733796256,
+            "boosting": 780.4694464837359
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 822.0,
+          "predictions": {
+            "last_week": 369.0,
+            "mean_4_weeks": 622.25,
+            "current": 1045.74,
+            "forest": 668.5946781868524,
+            "boosting": 791.1163698189263
+          }
+        },
+        {
+          "product_id": "UCI-84879",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 573.0,
+          "predictions": {
+            "last_week": 822.0,
+            "mean_4_weeks": 664.75,
+            "current": 1322.38,
+            "forest": 694.852408161889,
+            "boosting": 712.6053317463133
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 2693.0,
+          "predictions": {
+            "last_week": 984.0,
+            "mean_4_weeks": 986.25,
+            "current": 1122.4,
+            "forest": 841.9901333347942,
+            "boosting": 724.6887476647155
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 951.0,
+          "predictions": {
+            "last_week": 2693.0,
+            "mean_4_weeks": 1519.25,
+            "current": 1190.58,
+            "forest": 871.5419968927488,
+            "boosting": 966.709983646223
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 1056.0,
+          "predictions": {
+            "last_week": 951.0,
+            "mean_4_weeks": 1614.75,
+            "current": 999.16,
+            "forest": 752.5464661253814,
+            "boosting": 707.5456183401208
+          }
+        },
+        {
+          "product_id": "UCI-85099B",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 556.0,
+          "predictions": {
+            "last_week": 1056.0,
+            "mean_4_weeks": 1421.0,
+            "current": 1151.68,
+            "forest": 733.7507093984485,
+            "boosting": 689.903936152912
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-10-01",
+          "target_end": "2011-10-08",
+          "actual": 158.0,
+          "predictions": {
+            "last_week": 446.0,
+            "mean_4_weeks": 549.0,
+            "current": 485.8,
+            "forest": 610.9522309667052,
+            "boosting": 618.5000146579584
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-10-08",
+          "target_end": "2011-10-15",
+          "actual": 650.0,
+          "predictions": {
+            "last_week": 158.0,
+            "mean_4_weeks": 496.75,
+            "current": 551.02,
+            "forest": 693.6689128814774,
+            "boosting": 584.7508383352518
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-10-15",
+          "target_end": "2011-10-22",
+          "actual": 223.0,
+          "predictions": {
+            "last_week": 650.0,
+            "mean_4_weeks": 492.75,
+            "current": 599.64,
+            "forest": 689.9720351949036,
+            "boosting": 851.242823622721
+          }
+        },
+        {
+          "product_id": "UCI-85123A",
+          "origin": "2011-10-22",
+          "target_end": "2011-10-29",
+          "actual": 379.0,
+          "predictions": {
+            "last_week": 223.0,
+            "mean_4_weeks": 369.25,
+            "current": 629.06,
+            "forest": 1271.7976671424517,
+            "boosting": 760.2816350145268
+          }
+        }
+      ],
+      "mae": {
+        "last_week": 474.25,
+        "mean_4_weeks": 405.3875,
+        "current": 630.4373666666668,
+        "forest": 487.07297266958614,
+        "boosting": 493.3545114272427
+      },
+      "max_training_target": "2011-10-01"
+    }
+  ],
+  "validation_mae": {
+    "current": 568.506557936508,
+    "forest": 414.6529285708153,
+    "boosting": 429.37931463609397,
+    "last_week": 445.7916666666667,
+    "mean_4_weeks": 379.99583333333334
+  },
+  "selected_model": "forest",
+  "selected_method": "mean_4_weeks",
+  "comparison": {
+    "cutoff": "2011-11-01",
+    "training_pairs": 2970,
+    "cases": [
+      {
+        "product_id": "UCI-15036",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 41.0,
+        "predictions": {
+          "last_week": 123.0,
+          "mean_4_weeks": 148.5,
+          "current": 189.11542857142857,
+          "forest": 247.69582501699475,
+          "boosting": 208.8894595257912
+        },
+        "title": "ASSORTED COLOURS SILK FAN"
+      },
+      {
+        "product_id": "UCI-15036",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 128.0,
+        "predictions": {
+          "last_week": 41.0,
+          "mean_4_weeks": 133.25,
+          "current": 605.14,
+          "forest": 161.45223734940876,
+          "boosting": 154.12440451584817
+        },
+        "title": "ASSORTED COLOURS SILK FAN"
+      },
+      {
+        "product_id": "UCI-15036",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 100.0,
+        "predictions": {
+          "last_week": 128.0,
+          "mean_4_weeks": 105.75,
+          "current": 542.62,
+          "forest": 109.33327588189063,
+          "boosting": 73.07548629001457
+        },
+        "title": "ASSORTED COLOURS SILK FAN"
+      },
+      {
+        "product_id": "UCI-15036",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 297.0,
+        "predictions": {
+          "last_week": 100.0,
+          "mean_4_weeks": 98.0,
+          "current": 547.26,
+          "forest": 120.49147753399185,
+          "boosting": 143.9467416049298
+        },
+        "title": "ASSORTED COLOURS SILK FAN"
+      },
+      {
+        "product_id": "UCI-21212",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 1092.0,
+        "predictions": {
+          "last_week": 538.0,
+          "mean_4_weeks": 495.75,
+          "current": 823.768,
+          "forest": 597.4352409390953,
+          "boosting": 633.6463240102102
+        },
+        "title": "PACK OF 72 RETROSPOT CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21212",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 445.0,
+        "predictions": {
+          "last_week": 1092.0,
+          "mean_4_weeks": 629.75,
+          "current": 1136.22,
+          "forest": 777.6166544810785,
+          "boosting": 1194.7879826771932
+        },
+        "title": "PACK OF 72 RETROSPOT CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21212",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 561.0,
+        "predictions": {
+          "last_week": 445.0,
+          "mean_4_weeks": 574.5,
+          "current": 991.24,
+          "forest": 471.0251198187469,
+          "boosting": 486.15203923741166
+        },
+        "title": "PACK OF 72 RETROSPOT CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21212",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 254.0,
+        "predictions": {
+          "last_week": 561.0,
+          "mean_4_weeks": 659.0,
+          "current": 1990.94,
+          "forest": 699.9408203591327,
+          "boosting": 530.9540912418563
+        },
+        "title": "PACK OF 72 RETROSPOT CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21977",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 108.0,
+        "predictions": {
+          "last_week": 142.0,
+          "mean_4_weeks": 353.0,
+          "current": 287.8,
+          "forest": 215.79329243267946,
+          "boosting": 285.95340391491936
+        },
+        "title": "PACK OF 60 PINK PAISLEY CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21977",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 332.0,
+        "predictions": {
+          "last_week": 108.0,
+          "mean_4_weeks": 152.75,
+          "current": 389.72,
+          "forest": 382.6602281213281,
+          "boosting": 264.38596568858895
+        },
+        "title": "PACK OF 60 PINK PAISLEY CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21977",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 626.0,
+        "predictions": {
+          "last_week": 332.0,
+          "mean_4_weeks": 174.0,
+          "current": 504.42,
+          "forest": 695.9368974030037,
+          "boosting": 382.42389754269294
+        },
+        "title": "PACK OF 60 PINK PAISLEY CAKE CASES"
+      },
+      {
+        "product_id": "UCI-21977",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 209.0,
+        "predictions": {
+          "last_week": 626.0,
+          "mean_4_weeks": 302.0,
+          "current": 935.2085714285714,
+          "forest": 582.8661365669693,
+          "boosting": 727.4764377383281
+        },
+        "title": "PACK OF 60 PINK PAISLEY CAKE CASES"
+      },
+      {
+        "product_id": "UCI-22197",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 2843.0,
+        "predictions": {
+          "last_week": 2784.0,
+          "mean_4_weeks": 1481.75,
+          "current": 1551.954,
+          "forest": 1011.623742703263,
+          "boosting": 915.8657444100187
+        },
+        "title": "POPCORN HOLDER"
+      },
+      {
+        "product_id": "UCI-22197",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 3704.0,
+        "predictions": {
+          "last_week": 2843.0,
+          "mean_4_weeks": 1968.75,
+          "current": 498.6,
+          "forest": 1379.9718976948377,
+          "boosting": 1130.7616589288311
+        },
+        "title": "POPCORN HOLDER"
+      },
+      {
+        "product_id": "UCI-22197",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 2665.0,
+        "predictions": {
+          "last_week": 3704.0,
+          "mean_4_weeks": 2537.5,
+          "current": 5163.24,
+          "forest": 1417.4821932988566,
+          "boosting": 988.751084508313
+        },
+        "title": "POPCORN HOLDER"
+      },
+      {
+        "product_id": "UCI-22197",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 2484.0,
+        "predictions": {
+          "last_week": 2665.0,
+          "mean_4_weeks": 2999.0,
+          "current": 5163.24,
+          "forest": 1518.308889989095,
+          "boosting": 1117.3724190192268
+        },
+        "title": "POPCORN HOLDER"
+      },
+      {
+        "product_id": "UCI-22616",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 791.0,
+        "predictions": {
+          "last_week": 272.0,
+          "mean_4_weeks": 367.75,
+          "current": 348.0,
+          "forest": 205.59819668656658,
+          "boosting": 327.0062862924844
+        },
+        "title": "PACK OF 12 LONDON TISSUES "
+      },
+      {
+        "product_id": "UCI-22616",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 1215.0,
+        "predictions": {
+          "last_week": 791.0,
+          "mean_4_weeks": 457.0,
+          "current": 339.48,
+          "forest": 493.08311438308795,
+          "boosting": 408.4441743379651
+        },
+        "title": "PACK OF 12 LONDON TISSUES "
+      },
+      {
+        "product_id": "UCI-22616",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 265.0,
+        "predictions": {
+          "last_week": 1215.0,
+          "mean_4_weeks": 743.75,
+          "current": 1066.537523809524,
+          "forest": 534.9637774379839,
+          "boosting": 370.47548368558205
+        },
+        "title": "PACK OF 12 LONDON TISSUES "
+      },
+      {
+        "product_id": "UCI-22616",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 609.0,
+        "predictions": {
+          "last_week": 265.0,
+          "mean_4_weeks": 635.75,
+          "current": 1239.88,
+          "forest": 438.6607795232642,
+          "boosting": 617.9131307974383
+        },
+        "title": "PACK OF 12 LONDON TISSUES "
+      },
+      {
+        "product_id": "UCI-23166",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 39.0,
+        "predictions": {
+          "last_week": 46.0,
+          "mean_4_weeks": 59.5,
+          "current": 49.96,
+          "forest": 90.24061287478827,
+          "boosting": 69.5956522463144
+        },
+        "title": "MEDIUM CERAMIC TOP STORAGE JAR"
+      },
+      {
+        "product_id": "UCI-23166",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 76.0,
+        "predictions": {
+          "last_week": 39.0,
+          "mean_4_weeks": 56.0,
+          "current": 99.59809523809525,
+          "forest": 130.30883806063227,
+          "boosting": 72.41385619111982
+        },
+        "title": "MEDIUM CERAMIC TOP STORAGE JAR"
+      },
+      {
+        "product_id": "UCI-23166",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 392.0,
+        "predictions": {
+          "last_week": 76.0,
+          "mean_4_weeks": 53.0,
+          "current": 49.96,
+          "forest": 119.83577907216888,
+          "boosting": 89.56417041464566
+        },
+        "title": "MEDIUM CERAMIC TOP STORAGE JAR"
+      },
+      {
+        "product_id": "UCI-23166",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 90.0,
+        "predictions": {
+          "last_week": 392.0,
+          "mean_4_weeks": 138.25,
+          "current": 47.14,
+          "forest": 223.58683830027604,
+          "boosting": 86.25829749046213
+        },
+        "title": "MEDIUM CERAMIC TOP STORAGE JAR"
+      },
+      {
+        "product_id": "UCI-84077",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 1296.0,
+        "predictions": {
+          "last_week": 5102.0,
+          "mean_4_weeks": 1929.75,
+          "current": 5163.24,
+          "forest": 1332.4827732253495,
+          "boosting": 889.5262310235634
+        },
+        "title": "WORLD WAR 2 GLIDERS ASSTD DESIGNS"
+      },
+      {
+        "product_id": "UCI-84077",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 1224.0,
+        "predictions": {
+          "last_week": 1296.0,
+          "mean_4_weeks": 2012.5,
+          "current": 5163.24,
+          "forest": 1692.2405569290668,
+          "boosting": 1272.5318022008141
+        },
+        "title": "WORLD WAR 2 GLIDERS ASSTD DESIGNS"
+      },
+      {
+        "product_id": "UCI-84077",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 1174.0,
+        "predictions": {
+          "last_week": 1224.0,
+          "mean_4_weeks": 2193.5,
+          "current": 5163.24,
+          "forest": 1460.2568642723147,
+          "boosting": 679.4464880899321
+        },
+        "title": "WORLD WAR 2 GLIDERS ASSTD DESIGNS"
+      },
+      {
+        "product_id": "UCI-84077",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 624.0,
+        "predictions": {
+          "last_week": 1174.0,
+          "mean_4_weeks": 2199.0,
+          "current": 5163.24,
+          "forest": 1442.0434955114458,
+          "boosting": 689.114131194541
+        },
+        "title": "WORLD WAR 2 GLIDERS ASSTD DESIGNS"
+      },
+      {
+        "product_id": "UCI-84879",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 634.0,
+        "predictions": {
+          "last_week": 984.0,
+          "mean_4_weeks": 716.5,
+          "current": 970.38,
+          "forest": 650.8269630135543,
+          "boosting": 520.3756285017589
+        },
+        "title": "ASSORTED COLOUR BIRD ORNAMENT"
+      },
+      {
+        "product_id": "UCI-84879",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 2070.0,
+        "predictions": {
+          "last_week": 634.0,
+          "mean_4_weeks": 737.75,
+          "current": 1225.24,
+          "forest": 680.5995047197082,
+          "boosting": 580.7606960653628
+        },
+        "title": "ASSORTED COLOUR BIRD ORNAMENT"
+      },
+      {
+        "product_id": "UCI-84879",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 1211.0,
+        "predictions": {
+          "last_week": 2070.0,
+          "mean_4_weeks": 1069.25,
+          "current": 947.94,
+          "forest": 1143.9291630950358,
+          "boosting": 1375.389322143831
+        },
+        "title": "ASSORTED COLOUR BIRD ORNAMENT"
+      },
+      {
+        "product_id": "UCI-84879",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 898.0,
+        "predictions": {
+          "last_week": 1211.0,
+          "mean_4_weeks": 1224.75,
+          "current": 1302.02,
+          "forest": 1143.7943077281059,
+          "boosting": 1161.9943391452923
+        },
+        "title": "ASSORTED COLOUR BIRD ORNAMENT"
+      },
+      {
+        "product_id": "UCI-85099B",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 1179.0,
+        "predictions": {
+          "last_week": 341.0,
+          "mean_4_weeks": 1342.5,
+          "current": 425.58,
+          "forest": 715.7389364313758,
+          "boosting": 731.1331942334565
+        },
+        "title": "JUMBO BAG RED RETROSPOT"
+      },
+      {
+        "product_id": "UCI-85099B",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 2934.0,
+        "predictions": {
+          "last_week": 1179.0,
+          "mean_4_weeks": 882.5,
+          "current": 1328.88,
+          "forest": 1443.1731066110985,
+          "boosting": 1297.9442137914016
+        },
+        "title": "JUMBO BAG RED RETROSPOT"
+      },
+      {
+        "product_id": "UCI-85099B",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 841.0,
+        "predictions": {
+          "last_week": 2934.0,
+          "mean_4_weeks": 1356.5,
+          "current": 5163.24,
+          "forest": 1055.2779961009246,
+          "boosting": 967.6811587735294
+        },
+        "title": "JUMBO BAG RED RETROSPOT"
+      },
+      {
+        "product_id": "UCI-85099B",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 681.0,
+        "predictions": {
+          "last_week": 841.0,
+          "mean_4_weeks": 1323.75,
+          "current": 5163.24,
+          "forest": 1088.7688802388018,
+          "boosting": 989.5565068846939
+        },
+        "title": "JUMBO BAG RED RETROSPOT"
+      },
+      {
+        "product_id": "UCI-85123A",
+        "origin": "2011-11-01",
+        "target_end": "2011-11-08",
+        "actual": 1708.0,
+        "predictions": {
+          "last_week": 538.0,
+          "mean_4_weeks": 415.25,
+          "current": 538.84,
+          "forest": 447.3470625034905,
+          "boosting": 245.06150023064106
+        },
+        "title": "WHITE HANGING HEART T-LIGHT HOLDER"
+      },
+      {
+        "product_id": "UCI-85123A",
+        "origin": "2011-11-08",
+        "target_end": "2011-11-15",
+        "actual": 1220.0,
+        "predictions": {
+          "last_week": 1708.0,
+          "mean_4_weeks": 769.75,
+          "current": 1586.46,
+          "forest": 661.9447203228301,
+          "boosting": 944.8207827898261
+        },
+        "title": "WHITE HANGING HEART T-LIGHT HOLDER"
+      },
+      {
+        "product_id": "UCI-85123A",
+        "origin": "2011-11-15",
+        "target_end": "2011-11-22",
+        "actual": 774.0,
+        "predictions": {
+          "last_week": 1220.0,
+          "mean_4_weeks": 924.75,
+          "current": 1608.1,
+          "forest": 1278.6005383431464,
+          "boosting": 1266.15904858202
+        },
+        "title": "WHITE HANGING HEART T-LIGHT HOLDER"
+      },
+      {
+        "product_id": "UCI-85123A",
+        "origin": "2011-11-22",
+        "target_end": "2011-11-29",
+        "actual": 856.0,
+        "predictions": {
+          "last_week": 774.0,
+          "mean_4_weeks": 1060.0,
+          "current": 2095.96,
+          "forest": 1024.5383631302454,
+          "boosting": 1233.5000256513385
+        },
+        "title": "WHITE HANGING HEART T-LIGHT HOLDER"
+      }
+    ],
+    "mae": {
+      "last_week": 562.35,
+      "mean_4_weeks": 492.76875,
+      "current": 1283.2569404761903,
+      "forest": 485.3744311863153,
+      "boosting": 509.5739875056619
+    },
+    "max_training_target": "2011-11-01"
+  },
+  "per_product": [
+    {
+      "product_id": "UCI-23166",
+      "title": "MEDIUM CERAMIC TOP STORAGE JAR",
+      "mae": {
+        "current": 104.86452380952382,
+        "forest": 127.82512754088192,
+        "boosting": 85.08983203752169,
+        "last_week": 165.5,
+        "mean_4_weeks": 106.9375
+      }
+    },
+    {
+      "product_id": "UCI-84077",
+      "title": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "mae": {
+        "current": 4083.74,
+        "forest": 402.2559224845442,
+        "boosting": 253.6683035704649,
+        "last_week": 1119.5,
+        "mean_4_weeks": 1004.1875
+      }
+    },
+    {
+      "product_id": "UCI-85099B",
+      "title": "JUMBO BAG RED RETROSPOT",
+      "mae": {
+        "current": 2790.755,
+        "forest": 644.033708324313,
+        "boosting": 629.7900644083414,
+        "last_week": 1211.5,
+        "mean_4_weeks": 843.3125
+      }
+    },
+    {
+      "product_id": "UCI-85123A",
+      "title": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "mae": {
+        "current": 902.42,
+        "forest": 622.9617796617679,
+        "boosting": 651.9441978032228,
+        "last_week": 546.5,
+        "mean_4_weeks": 524.4375
+      }
+    },
+    {
+      "product_id": "UCI-21212",
+      "title": "PACK OF 72 RETROSPOT CAKE CASES",
+      "mae": {
+        "current": 781.658,
+        "forest": 340.77427852059225,
+        "boosting": 389.9859276678569,
+        "last_week": 406.0,
+        "mean_4_weeks": 299.875
+      }
+    },
+    {
+      "product_id": "UCI-22197",
+      "title": "POPCORN HOLDER",
+      "mae": {
+        "current": 2418.4815,
+        "forest": 1592.1533190784867,
+        "boosting": 1885.8122732834029,
+        "last_week": 535.0,
+        "mean_4_weeks": 934.75
+      }
+    },
+    {
+      "product_id": "UCI-15036",
+      "title": "ASSORTED COLOURS SILK FAN",
+      "mae": {
+        "current": 329.53385714285713,
+        "forest": 106.49746517857557,
+        "boosting": 93.49790903667375,
+        "last_week": 98.5,
+        "mean_4_weeks": 79.375
+      }
+    },
+    {
+      "product_id": "UCI-84879",
+      "title": "ASSORTED COLOUR BIRD ORNAMENT",
+      "mae": {
+        "current": 462.05499999999995,
+        "forest": 429.77315073172906,
+        "boosting": 507.81183418050034,
+        "last_week": 739.5,
+        "mean_4_weeks": 470.8125
+      }
+    },
+    {
+      "product_id": "UCI-21977",
+      "title": "PACK OF 60 PINK PAISLEY CAKE CASES",
+      "mae": {
+        "current": 271.32714285714286,
+        "forest": 150.56413863099516,
+        "boosting": 251.90499460549137,
+        "last_week": 242.25,
+        "mean_4_weeks": 242.3125
+      }
+    },
+    {
+      "product_id": "UCI-22616",
+      "title": "PACK OF 12 LONDON TISSUES ",
+      "mae": {
+        "current": 687.734380952381,
+        "forest": 436.90542171126634,
+        "boosting": 346.2345384631427,
+        "last_week": 559.25,
+        "mean_4_weeks": 421.6875
+      }
+    }
+  ],
+  "final_training_pairs": 3340,
+  "limitations": "November was previously inspected: exploratory comparison, not an independent final test. Cohort selected on August 1; v1 refitted on identical eligible rows. No production promotion.",
+  "forecasts": [
+    {
+      "product_id": "UCI-84879",
+      "prediction": 2071.372933275271,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-84077",
+      "prediction": 3556.184431042889,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-23166",
+      "prediction": 157.13046753515948,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-15036",
+      "prediction": 142.54653111967272,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-85099B",
+      "prediction": 1866.26305068459,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-22197",
+      "prediction": 2112.950100887015,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-21977",
+      "prediction": 597.0179212799529,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-21212",
+      "prediction": 952.8066270028804,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-22616",
+      "prediction": 648.7701925344346,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    },
+    {
+      "product_id": "UCI-85123A",
+      "prediction": 1727.2393139486173,
+      "as_of": "2011-12-08",
+      "status": "historical_forecast_unvalidated"
+    }
+  ]
+}

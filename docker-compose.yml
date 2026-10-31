@@ -63,6 +63,8 @@ services:
       DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-trendml}:${POSTGRES_PASSWORD:-trendml}@postgres:5432/${POSTGRES_DB:-trendml}
       ML_SITE: ${ML_SITE:-MLA}
       ML_QUERIES: ${ML_QUERIES:-notebook,auriculares,mouse gamer}
+      ML_ACCESS_TOKEN: ${ML_ACCESS_TOKEN:-}
+      ML_SELLER_ID: ${ML_SELLER_ID:-}
       BACKEND_INTERNAL_URL: ${BACKEND_INTERNAL_URL:-http://backend:8000}
       INTERNAL_CRON_TOKEN: ${INTERNAL_CRON_TOKEN:-dev-internal-token}
     depends_on:
