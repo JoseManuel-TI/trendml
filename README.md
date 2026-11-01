@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software con Inteligencia Artificial. Jose Manuel Castro Reina, grupo 14 individual; docente Matias Arellano.
 
-TrendML ofrece registro, acceso, tendencias, alertas de precio e inferencia semanal con un modelo propio. La entrega académica usa un catálogo sintético claramente identificado y un laboratorio UCI con ventas históricas reales británicas de 2010–2011. **No es una predicción comercial validada para Mercado Libre.**
+TrendML ofrece registro, acceso, tendencias, alertas de precio e inferencia semanal con un modelo propio. La entrega académica vigente está publicada en la rama [codex/entrega-academica](https://github.com/JoseManuel-TI/trendml/tree/codex/entrega-academica). Usa un catálogo sintético claramente identificado y un laboratorio UCI con ventas históricas reales británicas de 2010–2011. **No es una predicción comercial validada para Mercado Libre.**
 
 ## Arranque local
 
