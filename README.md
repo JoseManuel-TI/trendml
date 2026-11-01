@@ -41,7 +41,9 @@ Entradas: 56 días completos de ventas y precios; características de 7, 14, 28 
 
 Archivos generados (ignorados por Git): `work/uci/prepared-v2.json`, `work/uci/weekly-model-v3.joblib` y `work/uci/evaluation-v3.json`. El script también publica métricas en `frontend/public/training-results-v3.json`. Cargar únicamente artefactos joblib entrenados localmente y confiables.
 
-Resultados reproducidos el 31/10/2026: MAE de validación 374,26 frente a 380,00 de la referencia; noviembre 479,06 frente a 492,77. Los períodos ya fueron examinados: son resultados de desarrollo, no un test independiente ni una garantía comercial. Hay productos y períodos donde la referencia gana.
+El artefacto guarda la versión, el método, la fuente con hash, la fecha de inferencia, la fecha máxima de los objetivos de entrenamiento, la cantidad de pares y el MAE de desarrollo frente a la referencia. `/api/lab/forecast` devuelve esos metadatos y la pantalla `/forecast` los muestra en una ficha técnica. No son una medida de precisión del producto consultado.
+
+Resultados reproducidos el 01/11/2026: MAE de validación 374,26 frente a 380,00 de la referencia; noviembre 479,06 frente a 492,77. Los períodos ya fueron examinados: son resultados de desarrollo, no un test independiente ni una garantía comercial. Hay productos y períodos donde la referencia gana.
 
 ## Pruebas
 
@@ -49,7 +51,9 @@ Resultados reproducidos el 31/10/2026: MAE de validación 374,26 frente a 380,00
 bash scripts/check_academic.sh
 ```
 
-Ejecuta unittest con base aislada y compilación de Next.js. La prueba del artefacto real requiere el entrenamiento previo; sin él se marca omitida expresamente. Evidencia: `docs/entrega/pruebas.txt`, `inferencias.json` y documentos de entrega.
+Ejecuta unittest con base aislada y compilación de Next.js. La prueba del artefacto real requiere el entrenamiento previo; sin él se marca omitida expresamente. Evidencia: `docs/entrega/pruebas.txt`, `docs/entrega/Plan-de-pruebas.md`, `docs/entrega/inferencias.json` y documentos de entrega.
+
+El plan de pruebas incluye los diez casos de calidad de la IA, los adversarios, los defectos corregidos y el recorrido HTTP verificado. La lista de entrega y lo que sigue pendiente está en `docs/entrega/Checklist-entrega.md`; las actualizaciones del tablero, en `docs/entrega/Tablero-actualizaciones.md`.
 
 ## Arquitectura y trazabilidad
 
@@ -58,6 +62,8 @@ Ejecuta unittest con base aislada y compilación de Next.js. La prueba del artef
 - `backend/api/forecast.py`, `backend/services/forecast_service.py`, `/forecast`: HU05, HU06.
 - `scripts/prepare_uci.py`, `train_uci_v3.py`: HU07 y HU05.
 - Diseño, historias, pruebas y uso crítico de IA: `docs/entrega/Informe-final.md`.
+- Plan de pruebas y casos de IA: `docs/entrega/Plan-de-pruebas.md`.
+- Checklist de entrega: `docs/entrega/Checklist-entrega.md`.
 - Guion independiente: `docs/entrega/Exposicion-clases.docx`.
 - [Tablero Kanban](https://app.notion.com/p/28314a0e971e47468ef7160884411574).
 
@@ -65,6 +71,8 @@ Ejecuta unittest con base aislada y compilación de Next.js. La prueba del artef
 
 `ACADEMIC_MODE=true` por defecto: checkout bloqueado y registro sin correos externos. `start_academic.sh` fuerza este modo, proveedor de email local y DB aislada. `APP_SECRET` debe ser privado fuera de una demo. `FRONTEND_URL` controla CORS. `ADMIN_EMAILS` es una lista explícita de administradores; tener plan Premium no permite consultar datos administrativos.
 
+No versionar `.env` ni `backend/.env`. Si alguno se compartió o se expuso fuera de tu equipo, rotar sus claves antes de publicar. La demo no necesita credenciales reales de Mercado Libre, pagos ni correo.
+
 El catálogo académico es compartido y no admite carga de ventas privadas de vendedores. El aislamiento multiempresa, cuenta Mercado Libre real, despliegue público, pagos, mensajería y PostgreSQL en producción quedan fuera de la entrega validada. El código heredado de estas integraciones se conserva, pero no implica que esté aprobado para producción. Los scripts antiguos de inicio/seed comercial no son necesarios para esta demo.
 
-Los archivos `docs/academico/` describen el avance del 14/10. La versión de entrega actual está en `docs/entrega/`.
+La versión académica vigente y sus materiales están en `docs/entrega/`.

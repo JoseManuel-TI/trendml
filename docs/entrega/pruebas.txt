@@ -1,0 +1,117 @@
+TrendML - evidencia de pruebas
+Fecha: 2026-11-01
+Comando: bash scripts/check_academic.sh
+Entorno: backend/.venv (Python 3.9.6), Node.js 26.7.0, SQLite aislado
+Nota: los tracebacks de 'Historical inference unavailable' y 'Weekly model failed' son casos de fallo controlado esperados por las pruebas.
+
+/Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml/backend/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+test_academic_mode_disables_checkout (test_api.ApiTests) ... ok
+test_adversarial_daily_observations (test_api.ApiTests) ... ok
+test_empty_dataset_rejected (test_api.ApiTests) ... ok
+test_live_inference_permissions_and_missing_model (test_api.ApiTests) ... Historical inference unavailable
+Traceback (most recent call last):
+  File "/Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml/backend/api/forecast.py", line 16, in execute
+    return operation()
+  File "/Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml/backend/api/forecast.py", line 31, in <lambda>
+    return execute(lambda: forecast_service.forecast(payload.product_id))
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1093, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1097, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1152, in _execute_mock_call
+    raise effect
+FileNotFoundError
+ok
+test_login_invalid_session_and_inactive_user (test_api.ApiTests) ... ok
+test_plans_empty_data_and_admin_is_not_premium (test_api.ApiTests) ... ok
+test_price_drop_and_latest_trend_only (test_api.ApiTests) ... ok
+test_real_saved_model_inference (test_api.ApiTests) ... ok
+test_registration_duplicate_validation_and_hash (test_api.ApiTests) ... ok
+test_metrics_are_reproducible_from_cases (test_evaluation_artifact.EvaluationArtifactTests) ... ok
+test_saved_model_metadata_matches_report (test_evaluation_artifact.EvaluationArtifactTests) ... ok
+test_cancellations_future_selection_and_duplicates (test_uci_pipeline.PreparationTests) ... ok
+test_temporal_purge_removes_overlapping_targets (test_uci_pipeline.PreparationTests) ... ok
+test_future_changes_do_not_change_features (test_uci_v2.V2Tests) ... ok
+test_missing_and_duplicate_days_rejected (test_uci_v2.V2Tests) ... ok
+test_splits_keep_products_on_shared_dates_and_purge_targets (test_uci_v2.V2Tests) ... ok
+test_target_and_lags_are_seven_calendar_days (test_uci_v2.V2Tests) ... ok
+test_full_history_and_shared_temporal_split (test_uci_v3.ResidualTests) ... ok
+test_future_sales_do_not_change_inputs (test_uci_v3.ResidualTests) ... ok
+test_zero_correction_recovers_baseline_without_target (test_uci_v3.ResidualTests) ... ok
+test_collector_rejects_missing_sales (test_weekly_model.IntegrationTests) ... ok
+test_collector_sqlite_and_source (test_weekly_model.IntegrationTests) ... ok
+test_failure_keeps_conventional_analytics (test_weekly_model.IntegrationTests) ... Weekly model failed; conventional analytics remain available
+Traceback (most recent call last):
+  File "/Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml/backend/services/trend_service.py", line 23, in run_trend_detection
+    predictions = train_prediction_model(db)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1093, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1097, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/mock.py", line 1152, in _execute_mock_call
+    raise effect
+RuntimeError: fixture failure
+ok
+test_idempotent_and_latest_only (test_weekly_model.IntegrationTests) ... ok
+test_legacy_migration_is_additive (test_weekly_model.IntegrationTests) ... ok
+test_synthetic_no_fake_prediction (test_weekly_model.IntegrationTests) ... ok
+test_verified_path (test_weekly_model.IntegrationTests) ... ok
+test_decreasing_and_duplicate_dates (test_weekly_model.ModelTests) ... ok
+test_empty_and_short (test_weekly_model.ModelTests) ... ok
+test_invalid_values (test_weekly_model.ModelTests) ... ok
+test_latest_invalid_does_not_label_old_prediction_as_current (test_weekly_model.ModelTests) ... ok
+test_latest_observation_used (test_weekly_model.ModelTests) ... ok
+test_no_future_target_leakage (test_weekly_model.ModelTests) ... ok
+test_reset_excludes_old_segment (test_weekly_model.ModelTests) ... ok
+test_sparse_history_is_not_weekly (test_weekly_model.ModelTests) ... ok
+test_unknown_and_demo_excluded (test_weekly_model.ModelTests) ... ok
+test_weekly_increment (test_weekly_model.ModelTests) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.803s
+
+OK
+
+> trendml-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.18
+  - Experiments (use with caution):
+    · typedRoutes
+
+   Creating an optimized production build ...
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/13) ...
+   Generating static pages (3/13) 
+   Generating static pages (6/13) 
+   Generating static pages (9/13) 
+ ✓ Generating static pages (13/13)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    178 B          94.2 kB
+├ ○ /_not-found                          875 B          88.1 kB
+├ ○ /blog                                141 B          87.3 kB
+├ ○ /contact                             140 B          87.3 kB
+├ ○ /dashboard                           3.64 kB        97.6 kB
+├ ○ /forecast                            3.28 kB        97.3 kB
+├ ○ /login                               2.21 kB        89.4 kB
+├ ○ /ml/callback                         907 B          94.9 kB
+├ ○ /pricing                             178 B          94.2 kB
+├ ○ /register                            2.14 kB        89.3 kB
+└ ○ /training                            3.76 kB          91 kB
++ First Load JS shared by all            87.2 kB
+  ├ chunks/117-d4926fa127c9c76f.js       31.6 kB
+  ├ chunks/fd9d1056-da4fe925c643199e.js  53.7 kB
+  └ other shared chunks (total)          1.94 kB
+
+
+○  (Static)  prerendered as static content
+

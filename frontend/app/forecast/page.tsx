@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {apiGet, apiPost} from "@/lib/api";
 
 type Product = {product_id: string; title: string; as_of: string};
-type Forecast = {prediction:number; baseline:number; title:string; as_of:string; target_start:string; target_end:string; model_version:string; computed_at:string};
+type Forecast = {prediction:number; baseline:number; title:string; as_of:string; target_start:string; target_end:string; model_version:string; method?:string; computed_at:string; trained_through?:string; training_pairs?:number; validation_mae?:number; reference_mae?:number; model_generated_at?:string; limitations?:string};
 export default function ForecastPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selected, setSelected] = useState("");
@@ -45,6 +45,17 @@ export default function ForecastPage() {
       <p>Referencia promedio de cuatro semanas: {result.baseline.toFixed(1)} unidades.</p>
       <p>Modelo: {result.model_version}. Cálculo ejecutado: {new Date(result.computed_at).toLocaleString("es-AR")}.</p>
       <p>No conocemos aquí las ventas futuras del período estimado. La diferencia con la referencia no demuestra mayor precisión.</p>
+      <details className="rounded-lg bg-slate-50 p-4 text-sm">
+        <summary className="cursor-pointer font-semibold">Ficha técnica y límites del modelo</summary>
+        <dl className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div><dt className="font-medium">Entrenado con objetivos conocidos hasta</dt><dd>{result.trained_through ?? "no informado"}</dd></div>
+          <div><dt className="font-medium">Pares de entrenamiento</dt><dd>{result.training_pairs ?? "no informado"}</dd></div>
+          <div><dt className="font-medium">MAE de desarrollo (validación)</dt><dd>{typeof result.validation_mae === "number" ? result.validation_mae.toFixed(2) : "no informado"} unidades</dd></div>
+          <div><dt className="font-medium">MAE de referencia de cuatro semanas</dt><dd>{typeof result.reference_mae === "number" ? result.reference_mae.toFixed(2) : "no informado"} unidades</dd></div>
+        </dl>
+        <p className="mt-3">{result.limitations ?? "Resultado experimental sin evaluación independiente."}</p>
+        <p className="mt-2">El MAE es una medida global de desarrollo, no la precisión de este producto ni de esta semana.</p>
+      </details>
     </section>}
     <Link className="underline" href="/training">Ver evaluación histórica, errores y comparación con referencias</Link>
   </main>;

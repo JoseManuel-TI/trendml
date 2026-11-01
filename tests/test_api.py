@@ -87,6 +87,7 @@ class ApiTests(unittest.TestCase):
 
     def test_live_inference_permissions_and_missing_model(self):
         self.assertEqual(self.client.post('/api/lab/forecast',headers=self.headers,json={'product_id':'P'}).status_code,403)
+        self.assertEqual(self.client.get('/api/lab/products').status_code,403)
         self.plan('pro')
         self.assertEqual(self.client.post('/api/lab/forecast',headers=self.headers,json={'product_id':''}).status_code,422)
         with patch.object(forecast_service,'forecast',side_effect=FileNotFoundError):
@@ -97,13 +98,22 @@ class ApiTests(unittest.TestCase):
         self.plan('pro')
         products=self.client.get('/api/lab/products',headers=self.headers)
         self.assertEqual(products.status_code,200)
-        pid=products.json()['products'][0]['product_id']
+        catalog=products.json()
+        self.assertEqual(catalog['model_version'],'weekly-residual-v3')
+        self.assertEqual(catalog['source']['license'],'CC BY 4.0')
+        self.assertGreater(catalog['training_pairs'],0)
+        self.assertLessEqual(catalog['trained_through'],catalog['products'][0]['as_of'])
+        pid=catalog['products'][0]['product_id']
         response=self.client.post('/api/lab/forecast',headers=self.headers,json={'product_id':pid})
         self.assertEqual(response.status_code,200)
         data=response.json()
         self.assertGreaterEqual(data['prediction'],0)
         self.assertEqual(data['status'],'historical_forecast_unvalidated')
         self.assertEqual((datetime.fromisoformat(data['target_end'])-datetime.fromisoformat(data['as_of'])).days,7)
+        self.assertLessEqual(data['trained_through'],data['as_of'])
+        self.assertGreater(data['training_pairs'],0)
+        self.assertTrue(data['validation_mae'] >= 0)
+        self.assertEqual(data['source']['doi'],'10.24432/C5BW33')
         self.assertEqual(self.client.post('/api/lab/forecast',headers=self.headers,json={'product_id':'missing'}).status_code,404)
 
     def test_adversarial_daily_observations(self):

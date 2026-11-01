@@ -103,11 +103,22 @@ def run(prepared, output_dir, public_path):
     worst = sorted(comparison['cases'], key=lambda c: abs(c['actual']-c['predictions'][selected_model]), reverse=True)[:5]
     final_model = fit_residual(frame, selected_model)
     output_dir.mkdir(parents=True, exist_ok=True)
+    generated_at = datetime.now(timezone.utc).isoformat()
+    trained_through = frame.target_at.max().date().isoformat()
     joblib.dump({'model': final_model, 'features': FEATURES, 'method': selected_model,
                  'prediction_rule': 'max(0, baseline + (baseline + 1) * model.predict(features))',
                  'model_version': 'weekly-residual-v3', 'source': prepared['source'],
-                 'as_of': latest.captured_at.max().isoformat()}, output_dir/'weekly-model-v3.joblib')
-    report = {'version': 'weekly-residual-v3', 'generated_at': datetime.now(timezone.utc).isoformat(),
+                 'as_of': latest.captured_at.max().isoformat(),
+                 'trained_through': trained_through,
+                 'training_pairs': len(frame),
+                 'validation_cutoffs': VALIDATION_CUTOFFS,
+                 'comparison_cutoff': COMPARISON_CUTOFF,
+                 'validation_mae': float(averages[selected_model]),
+                 'reference_mae': float(averages['mean_4_weeks']),
+                 'generated_at': generated_at,
+                 'limitations': 'Resultado de desarrollo; períodos de evaluación ya examinados; sin prueba independiente; no es un pronóstico comercial.'},
+                output_dir/'weekly-model-v3.joblib')
+    report = {'version': 'weekly-residual-v3', 'generated_at': generated_at,
               'source': prepared['source'], 'preparation': prepared['preparation'], 'features': FEATURES,
               'labels': LABELS, 'validation': validation, 'validation_mae': averages,
               'selected_model': selected_model, 'selected_method': selected_method,
