@@ -23,10 +23,10 @@ Revisión: 1 de noviembre de 2026
 
 ## Repositorio
 
-- ☑ Enlace existente: https://github.com/JoseManuel-TI/trendml
+- ☑ Repositorio público: https://github.com/JoseManuel-TI/trendml. Versión académica publicada en la rama [codex/entrega-academica](https://github.com/JoseManuel-TI/trendml/tree/codex/entrega-academica).
 - ☑ README con instalación, entrenamiento, ejecución, configuración académica y límites de IA.
-- ◐ Hay al menos cuatro funcionalidades trazables localmente (registro/acceso, tendencias, alertas y predicción IA) y la inferencia histórica con modelo guardado fue ejecutada y probada. Los cambios y documentos actuales están sin publicar: la copia alojada en GitHub aún no demuestra esta versión final.
-- ◐ El historial existente tiene commits incrementales desde abril hasta octubre, pero el cierre/documentación y cambios locales actuales siguen sin commit ni publicación remota.
+- ☑ Hay al menos cuatro funcionalidades trazables (registro/acceso, tendencias, alertas y predicción IA); la inferencia histórica con el modelo guardado fue ejecutada y probada. Código y documentos están publicados en la rama académica indicada.
+- ☑ Historial con commits incrementales; el paquete de entrega quedó publicado en el commit `9a82c1b` de la rama académica.
 
 ## Exposición oral
 
@@ -39,8 +39,8 @@ Revisión: 1 de noviembre de 2026
 ## Para cerrar antes de subir
 
 1. Guardar la tercera captura real como `tablero-03.png` y revisar que no muestre información privada.
-2. Revisar los cambios locales, confirmar los archivos a publicar y subir la versión final a GitHub; verificar luego que el enlace remoto muestre el README y los documentos.
-3. Ejecutar `bash scripts/check_academic.sh` desde la versión que se vaya a publicar y conservar el resultado actualizado.
+2. Entregar el enlace a la rama `codex/entrega-academica`, donde están el README, el código y los documentos revisados.
+3. La rama publicada incluye evidencia de 37 pruebas y compilación frontend correctas; usar esa rama para la revisión académica.
 4. Hacer al menos una pasada oral con cronómetro y completar el registro de `ensayo-cronometrado.md`.
 5. Llevar el sistema levantado y el modelo entrenado para hacer la inferencia en vivo; explicar que son datos históricos UCI y declarar sus límites.
 6. Confirmar con el docente el horario de exposición.

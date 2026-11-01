@@ -22,7 +22,7 @@ Kanban con un responsable: Jose Manuel Castro Reina. Flujo Backlog, Pendiente, E
 Terminado significa criterios cumplidos, pruebas pertinentes ejecutadas, evidencia, revisión y commit para código. El tablero se actualiza al cerrar hitos. Las capturas se registran con la fecha real de la sesión; no reconstruyen fotografías de etapas anteriores.
 
 Tablero: https://app.notion.com/p/28314a0e971e47468ef7160884411574
-Repositorio: https://github.com/JoseManuel-TI/trendml
+Repositorio y rama de entrega: https://github.com/JoseManuel-TI/trendml/tree/codex/entrega-academica
 
 ## 3 Organización del trabajo
 
