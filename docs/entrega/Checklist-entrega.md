@@ -30,7 +30,7 @@ Revisión: 6 de noviembre de 2026
 
 ## Exposición oral
 
-- ◐ La aplicación contiene inferencia con datos históricos reales de UCI Online Retail y hay evidencia local de ejecución; el usuario debe realizar la demostración en vivo durante la exposición. UCI son ventas históricas británicas de 2010–2011, no ventas actuales propias ni de Mercado Libre.
+- ◐ Demostración en vivo verificada localmente el 06/11/2026: login Pro, catálogo de diez productos, inferencia real (496,6 unidades para UCI-22616), restricción Starter (403) y frontend correcto. Falta realizarla durante la exposición. UCI son ventas históricas británicas de 2010–2011, no ventas actuales propias ni de Mercado Libre.
 - ☑ Guion preparado para explicar Kanban y Notion: `Exposicion-clases.md` / `.docx`.
 - ☑ Registro y análisis crítico de herramientas de IA incluidos en el informe.
 - ◐ Exposición individual: Jose Manuel Castro Reina es el único integrante y el docente autorizó esta modalidad, según lo informado por el estudiante. Falta realizar la exposición y confirmar el turno.

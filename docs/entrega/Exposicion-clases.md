@@ -1,7 +1,7 @@
 # TrendML guía para exponer en clase
 
 Jose Manuel Castro Reina · Grupo 14 individual
-Profesor Matias Arellano · 31 de octubre de 2026
+Profesor Matias Arellano · 31 de octubre de 2026 · Revisión: 6 de noviembre de 2026
 Duración orientativa 8 a 10 minutos
 
 Esta guía sirve para explicar el problema, demostrar la aplicación y defender las decisiones del modelo. Preparar las ventanas de Login, Predecir, Entrenamiento y Notion antes de comenzar. Leer las ideas y ensayar con palabras propias.
@@ -99,6 +99,8 @@ bash scripts/start_academic.sh
 
 Dejar esa terminal abierta. Abrir http://localhost:3000/login y pulsar Entrar como demo. Si el modelo falta, detenerse y ejecutar antes bash scripts/train_academic.sh. No entrenar por primera vez durante la exposición.
 
+Verificado el 06/11/2026: login, catálogo de diez productos, inferencia real (496,6 unidades para UCI-22616), restricción Starter (403) y frontend respondieron correctamente en local.
+
 Acceso manual Pro: demo@example.com / DemoTrendML123!
 Starter para demostrar restricciones: starter@example.com / DemoTrendML123!
 Las cuentas nuevas quedan en Starter. No utilizar cuentas o contraseñas personales en la presentación.
@@ -109,7 +111,7 @@ Las cuentas nuevas quedan en Starter. No utilizar cuentas o contraseñas persona
 
 • Abrir el informe, este guion y el tablero Notion.
 
-• Mostrar la captura actual del tablero y explicar que documenta el estado de hoy; no reconstruye movimientos históricos. Guardar el enlace del repositorio actualizado.
+• Mostrar las tres capturas del tablero (`tablero-01`, `02` y `03`) y explicar que documentan estados reales del 31/10 y 01/11; no reconstruyen movimientos históricos. Tener a mano el enlace del repositorio actualizado.
 
 • Hacer una pasada personal con cronómetro y anotar el tiempo en [ensayo-cronometrado.md](ensayo-cronometrado.md); explicar con palabras propias.
 
