@@ -37,6 +37,8 @@ bash scripts/start_academic.sh
 
 Esperar a que aparezcan `Uvicorn running on http://127.0.0.1:8000` y `Ready` del frontend. Luego abrir http://localhost:3000/login y pulsar **Entrar como demo**. Si el modelo falta, ejecutar antes `bash scripts/train_academic.sh`. Si un puerto está ocupado, detener la instancia anterior antes de volver a iniciar.
 
+**Notas de arranque:** si aparece `urllib3 ... LibreSSL`, es una advertencia de la librería y no impide la inferencia. El `404` de `/favicon.ico` es inocuo. Si `/` devuelve `404` al inicio, esperar a que Next compile y abrir `/login`. Para detener el sistema, `Ctrl+C` en la terminal.
+
 | Paso | Qué mostrar y decir |
 | --- | --- |
 | 1 Acceso | Abrir /login y pulsar Entrar como demo. La cuenta Pro local no necesita un pago. |
