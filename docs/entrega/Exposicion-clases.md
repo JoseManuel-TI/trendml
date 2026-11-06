@@ -32,7 +32,7 @@ Abrir una terminal y ejecutar desde la carpeta del proyecto:
 
 ```bash
 cd /Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml
-bash scripts/start_academic.sh
+bash scripts/start_academic.shgit
 ```
 
 Esperar a que aparezcan `Uvicorn running on http://127.0.0.1:8000` y `Ready` del frontend. Luego abrir http://localhost:3000/login y pulsar **Entrar como demo**. Si el modelo falta, ejecutar antes `bash scripts/train_academic.sh`. Si un puerto está ocupado, detener la instancia anterior antes de volver a iniciar.
@@ -103,6 +103,48 @@ Se identificaron tareas con historias y evidencia. El WIP es uno y se actualiza 
 ### Quién es responsable del trabajo
 
 Yo soy responsable de revisar, comprender y defender el proyecto. Codex es una herramienta, no un integrante del grupo.
+
+## Preguntas sorpresa adicionales
+
+### ¿Qué es un mockup o wireframe y cuáles usaste?
+
+Son bocetos de las pantallas que definen estructura y estados antes de depender del código. En el proyecto están en `docs/entrega/wireframes-actuales.png`: acceso, dashboard, predicción, evaluación, permisos y preparación de datos. No son capturas de la aplicación.
+
+### ¿Cómo está codificado y organizado el proyecto?
+
+El código separa responsabilidades: `frontend/app` contiene las pantallas Next.js; `backend/api`, las rutas FastAPI; `backend/services`, la lógica y la inferencia; `backend/models`, SQLAlchemy; `scripts`, datos y entrenamiento; `tests`, las pruebas. La validación de entrada usa Pydantic y los permisos se comprueban en la API, no solo en la interfaz. En los datos, la IA usa variables numéricas de ventas (7, 14, 28 y 56 días); el ID del producto selecciona el historial, no entra como variable predictora.
+
+### ¿Qué contiene el README y cómo se levanta el sistema?
+
+`README.md` explica requisitos, instalación, entrenamiento, arranque, cuentas demo, rutas y límites de la IA. El arranque es `scripts/start_academic.sh`: crea o siembra `work/academic.db` y levanta FastAPI en el puerto 8000 y Next.js en el 3000. Luego se abre `http://localhost:3000/login`. Si falta el modelo, antes se ejecuta `scripts/train_academic.sh`.
+
+### ¿Cómo se ejecuta la IA desde la interfaz?
+
+La pantalla `/forecast` llama a `POST /api/lab/forecast` con un `product_id`. El servicio carga `work/uci/weekly-model-v3.joblib`, construye las variables con la última observación válida y ejecuta `predict`; devuelve unidades, referencia, fecha de corte, horizonte y metadatos. No recibe rutas joblib externas ni entrena durante la petición.
+
+### ¿Cómo entrenaste el modelo y con qué datos?
+
+`scripts/train_academic.sh` descarga UCI Online Retail, prepara ventas diarias y entrena la versión 3. Usa variables de 7, 14, 28 y 56 días; el objetivo es la suma de los siete días siguientes. Solo entran etiquetas conocidas en el corte. La validación es agosto–octubre de 2011 y noviembre se informa como comparación exploratoria. El artefacto final usa 3.060 pares.
+
+### ¿Cómo evitas usar datos del futuro?
+
+Las variables miran solo hacia atrás y el objetivo de siete días debe estar completamente conocido en la fecha de corte. Además, el servicio rechaza un modelo entrenado con objetivos posteriores a su corte o construido con otro hash del archivo de datos.
+
+### ¿Qué significa el MAE y por qué no es un porcentaje de acierto?
+
+MAE es el promedio del error absoluto, expresado en unidades por producto y semana. Un MAE de 374,26 significa que, en promedio, el modelo se equivoca unas 374 unidades; la referencia se equivoca unas 380. La mejora es pequeña y desigual, y no es una prueba independiente.
+
+### ¿Qué validaciones y controles de seguridad tiene el código?
+
+Validación de correo y contraseña en la API, almacenamiento de hash, JWT para sesiones, permisos por plan en el backend, lista explícita de administradores, checkout bloqueado en modo académico, `.env` fuera de Git, CORS restringido y base local separada. La IA no acepta rutas de artefactos externas.
+
+### ¿Cómo aplicaste Kanban y dónde está la evidencia?
+
+Usé Notion con Backlog, Pendiente, En proceso y Finalizado, WIP máximo de una tarjeta y tareas T01–T13 ligadas a HU01–HU08, con etiqueta para las tareas de IA. La evidencia está en `tablero-01.png`, `tablero-02.png`, `tablero-03.png`, `Tablero-actualizaciones.md` y `Checklist-entrega.md`.
+
+### ¿Qué limitaciones tiene el sistema y qué harías con más tiempo?
+
+Los datos son históricos británicos de 2010–2011, el dashboard usa datos sintéticos, no hay ventas propias ni aislamiento multiusuario, la mejora frente a la referencia es pequeña y no existe una prueba independiente; no es un pronóstico comercial. Con más tiempo incorporaría ventas propias autorizadas, stock, una validación temporal nueva, monitoreo, multiempresa y despliegue seguro.
 
 ## Preparación antes de entrar a clase
 
