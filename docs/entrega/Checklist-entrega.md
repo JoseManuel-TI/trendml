@@ -1,7 +1,7 @@
 # Checklist de entrega — TrendML
 
 Jose Manuel Castro Reina · Grupo 14 individual · Docente Matias Arellano  
-Revisión: 1 de noviembre de 2026
+Revisión: 6 de noviembre de 2026
 
 **Leyenda:** ☑ con evidencia local o verificable · ◐ preparado/implementado pero falta completar la evidencia final · ☐ pendiente
 
@@ -17,7 +17,7 @@ Revisión: 1 de noviembre de 2026
 
 ## Tablero de tareas
 
-- ◐ Capturas en al menos tres momentos: están guardadas `tablero-01.png` y `tablero-02.png` (ambas del 31/10/2026 y con estados diferentes). El 01/11/2026 se tomó una tercera captura real en Notion, visible en la conversación y con T13 ya finalizada, pero falta exportarla/guardarla como `tablero-03.png` dentro de esta carpeta antes de adjuntar la entrega.
+- ☑ Capturas en al menos tres momentos: `tablero-01.png` y `tablero-02.png` (31/10/2026, estados diferentes) y `tablero-03.png` (estado del 01/11/2026 con T13 finalizada). Las tres imágenes están en `docs/entrega/`.
 - ☑ Las tarjetas se vinculan con HU01–HU08 e identifican las tareas de IA. Tablero Notion: https://app.notion.com/p/28314a0e971e47468ef7160884411574
 - ☑ WIP máximo 1; al 01/11/2026, T03 está En proceso. La pasada oral de T08 sigue Pendiente.
 
@@ -38,12 +38,11 @@ Revisión: 1 de noviembre de 2026
 
 ## Para cerrar antes de subir
 
-1. Guardar la tercera captura real como `tablero-03.png` y revisar que no muestre información privada.
-2. Entregar el enlace a la rama `codex/entrega-academica`, donde están el README, el código y los documentos revisados.
-3. La rama publicada incluye evidencia de 37 pruebas y compilación frontend correctas; usar esa rama para la revisión académica.
-4. Hacer al menos una pasada oral con cronómetro y completar el registro de `ensayo-cronometrado.md`.
-5. Llevar el sistema levantado y el modelo entrenado para hacer la inferencia en vivo; explicar que son datos históricos UCI y declarar sus límites.
-6. Confirmar con el docente el horario de exposición.
+1. Entregar el enlace a la rama `codex/entrega-academica`, donde están el README, el código y los documentos revisados. La rama local y la remota están sincronizadas en el commit `70fce37`.
+2. La rama publicada incluye evidencia de 37 pruebas y compilación frontend correctas; usar esa rama para la revisión académica.
+3. Hacer al menos una pasada oral con cronómetro y completar el registro de `ensayo-cronometrado.md`.
+4. Llevar el sistema levantado y el modelo entrenado para hacer la inferencia en vivo; explicar que son datos históricos UCI y declarar sus límites.
+5. Confirmar con el docente el horario de exposición.
 
 ## Límites que deben quedar claros en la entrega
 

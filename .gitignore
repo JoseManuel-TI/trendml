@@ -18,6 +18,9 @@ node_modules/
 # OS
 .DS_Store
 
+# Office lock files
+~$*
+
 # Local audit logs and validation copies
 work/
 

@@ -3,7 +3,7 @@
 Jose Manuel Castro Reina · Grupo 14 individual
 Docente Matias Arellano
 Desarrollo de Software con Inteligencia Artificial
-31 de octubre de 2026
+31 de octubre de 2026 · Revisión de entrega: 6 de noviembre de 2026
 
 TrendML permite consultar tendencias y cambios de precio y ejecutar una estimación semanal con IA. La versión académica implementa registro, acceso, análisis convencional, permisos e inferencia visible. Combina una demostración sintética con un laboratorio histórico real; la estimación todavía no está validada para decisiones comerciales actuales.
 
@@ -184,11 +184,11 @@ Son credenciales públicas de prueba. La base work/academic.db está separada de
 
 ### Materiales
 
-Informe-final.docx: documento académico. Exposicion-clases.docx: guion independiente. Plan-de-pruebas.md: plan y resultados, casos de IA y adversarios. Checklist-entrega.md: estado de requisitos y pendientes. Tablero-actualizaciones.md: estado registrado del tablero. pruebas.txt: resultados de tests. inferencias.json: diez respuestas del modelo real con metadatos. demo-inferencia.png: evidencia visual. tablero-01.png y tablero-02.png: dos estados guardados; la tercera captura se tomó el 01/11/2026 y queda por exportar como tablero-03.png.
+Informe-final.docx: documento académico. Exposicion-clases.docx: guion independiente. Plan-de-pruebas.md: plan y resultados, casos de IA y adversarios. Checklist-entrega.md: estado de requisitos y pendientes. Tablero-actualizaciones.md: estado registrado del tablero. pruebas.txt: resultados de tests. inferencias.json: diez respuestas del modelo real con metadatos. demo-inferencia.png: evidencia visual. tablero-01.png, tablero-02.png y tablero-03.png: tres estados reales del Kanban (31/10/2026 y 01/11/2026).
 
 ### Control final de entrega
 
-El documento y el código local no sustituyen la publicación remota, la carga en el aula ni el ensayo oral. Antes de entregar, comprobar que el enlace de GitHub contiene la rama final y adjuntar las tres capturas reales del tablero. Las capturas de cierre tomadas en una misma sesión no representan etapas de semanas anteriores.
+El documento y el código local no sustituyen la carga en el aula ni el ensayo oral. La rama final ya está publicada y las tres capturas reales del tablero están guardadas. Antes de entregar, verificar el enlace remoto y ensayar la demostración. Las capturas de cierre tomadas en una misma sesión no representan etapas de semanas anteriores.
 
 ### Fuentes y atribución
 

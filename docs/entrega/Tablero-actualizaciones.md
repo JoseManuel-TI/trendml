@@ -12,7 +12,7 @@ El tablero existe en Notion: https://app.notion.com/p/28314a0e971e47468ef7160884
 | T08 · Revisar y ensayar exposición de puntos 1 a 5 | Pendiente | Guion y hoja de tiempos preparados. Falta pasada oral personal y confirmación del turno. |
 | T09 · Crear tablero y registrar primera captura | Finalizado | Tablero y captura inicial guardada. |
 | T10 · Revisar y publicar cambios en GitHub | Pendiente | Hay cambios y documentos locales sin commit/publicación. |
-| T13 · Capturar avances en dos sesiones posteriores | Finalizado | Tercera captura real tomada el 01/11/2026. Se documentó el estado actual; no se inventaron etapas históricas. La imagen aún debe exportarse como `tablero-03.png` en `docs/entrega/`. |
+| T13 · Capturar avances en dos sesiones posteriores | Finalizado | Tercera captura real del estado del 01/11/2026 guardada como `tablero-03.png` en `docs/entrega/`. Se documentó el estado actual; no se inventaron etapas históricas. |
 | Otras tareas | Según tablero | No cambiar estados sin evidencia de aceptación y pruebas. |
 
 Se mantiene WIP máximo 1: T03 es la única tarea En proceso. T08 continúa Pendiente hasta que Jose realice el ensayo; no se marca como realizado por haber preparado una estimación de duración.
@@ -21,6 +21,6 @@ Se mantiene WIP máximo 1: T03 es la única tarea En proceso. T08 continúa Pend
 
 - `tablero-01.png`: vista anterior del tablero, 31/10/2026.
 - `tablero-02.png`: vista posterior con cambios de estado, 31/10/2026.
-- Captura tomada el 01/11/2026: estado actual de Notion, T13 finalizada; pendiente guardarla en disco como `tablero-03.png`.
+- `tablero-03.png`: estado de Notion del 01/11/2026, con T13 finalizada; imagen guardada en `docs/entrega/`.
 
 Las fechas distinguen los registros disponibles. No se atribuyen capturas a fechas anteriores a su evidencia.

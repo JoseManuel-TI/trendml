@@ -10,7 +10,7 @@ Jose Manuel Castro Reina · Grupo 14 individual · Docente Matias Arellano
 4. `Tablero-actualizaciones.md`: estado actual de Notion, sin inventar fechas.
 5. `Exposicion-clases.docx`: guion oral; `Exposicion-clases.md` es su fuente editable.
 6. Diagramas: `er.png`, `flujo-ia.png`, `wireframes-actuales.png`.
-7. Evidencias: `demo-inferencia.png`, `inferencias.json`, `pruebas.txt`, `tablero-01.png` y `tablero-02.png`. La tercera captura se tomó el 01/11/2026 y está identificada en el checklist como pendiente de exportar al archivo `tablero-03.png`.
+7. Evidencias: `demo-inferencia.png`, `inferencias.json`, `pruebas.txt`, `tablero-01.png`, `tablero-02.png` y `tablero-03.png`. Las tres capturas del tablero cubren el 31/10/2026 y el 01/11/2026.
 8. `ensayo-cronometrado.md`: tiempos estimados y registro vacío para la práctica oral real.
 
 ## Demostración
@@ -28,5 +28,5 @@ Abrir http://localhost:3000/login, pulsar **Entrar como demo**, ir a **Predecir*
 - Modelo histórico británico 2010–2011, sin validación comercial actual.
 - Mejora pequeña y desigual frente a referencias simples; los períodos mostrados ya se inspeccionaron.
 - Faltan datos propios, período independiente y aislamiento multiusuario para uso comercial.
-- La captura tres se realizó en Notion, pero falta guardar su PNG en esta carpeta.
-- El ensayo oral personal, la confirmación del turno y la publicación de la versión final siguen pendientes.
+- Las tres capturas del tablero están guardadas; la tercera refleja el estado del 01/11/2026.
+- El ensayo oral personal y la confirmación del turno siguen pendientes.
