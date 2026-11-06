@@ -151,24 +151,26 @@ Entradas detalladas y resultados: evaluation-v3.json y frontend/public/training-
 
 Validación de contraseña solo en frontend → validación en API. Snapshots antiguos duplicados → último por producto. Lista vacía de alertas confundida con permisos → estados separados. Premium accedía a datos administrativos → lista explícita de administradores. Resultados estáticos sin inferencia desde UI → nueva API y pantalla. Dependencia openpyxl ausente → instalación fijada y entrenamiento reproducido.
 
-## 9 Uso de IA y análisis crítico
+## 9 Registro y análisis de herramientas de IA
 
-| Herramienta y etapa | Uso y resultado | Revisión |
-| --- | --- | --- |
-| Codex · Análisis | Selección de TrendML y borrador de ocho historias. | Ajustado a trabajo individual, datos disponibles y alcance académico. |
-| Codex · Gestión | Kanban, WIP, tarjetas y documentos. | Estados ligados a evidencia; sin inventar sprints ni fechas. |
-| Codex · Diseño | ER, wireframes y circuito de inferencia. | Se distinguió el laboratorio de las predicciones operativas. |
-| Codex · Desarrollo | Corrección temporal, API, interfaz y manejo de errores. | Cambios contrastados con código y recorridos reales. |
-| Codex · Pruebas | Tests de aceptación, adversarios y análisis de errores. | Se ejecutaron 37 tests y se revisó la inferencia en navegador. |
-| scikit-learn · Producto | Boosting residual para estimación semanal. | Comparado contra referencias; sin garantía comercial. |
+Cobertura mínima: Análisis, Gestión, Diseño, Desarrollo y Pruebas. Se añade una fila para la herramienta de IA del producto.
 
-La asistencia con IA aportó más valor al detectar inconsistencias entre el objetivo declarado y el cálculo real. Predecir un registro posterior no equivale automáticamente a predecir siete días: fue necesario definir fechas y etiquetas. También ayudó a convertir requisitos en pruebas que permiten revisar si la aplicación cumple lo esperado.
+| Herramienta | Etapa | Para qué se usó | Resultado obtenido | ¿Tal cual o ajustado? |
+| --- | --- | --- | --- | --- |
+| Codex | Análisis | Seleccionar el sistema y redactar el borrador de las ocho historias de usuario. | Historias HU01–HU08 y alcance académico inicial. | Ajustado: se recortó el alcance, se fijó el trabajo individual y se añadieron criterios verificables. |
+| Codex | Gestión | Definir el flujo Kanban, el WIP 1, las tarjetas T01–T13 y los documentos de entrega. | Tablero y checklist ligados a evidencia. | Ajustado: se eliminaron sprints y fechas inventadas; cada estado exige prueba o commit. |
+| Codex | Diseño | Proponer el ER, los wireframes y el circuito de integración de IA. | Diagramas `er.png`, `wireframes-actuales.png` y `flujo-ia.png`. | Ajustado: se separó el laboratorio histórico de las predicciones operativas y se corrigieron entradas y salidas. |
+| Codex | Desarrollo | Revisar y corregir la API de inferencia, la interfaz y el manejo de errores. | Código de `/forecast`, `forecast_service.py` y estados de error. | Ajustado: los cambios se contrastaron con el código y recorridos HTTP reales; se corrigió un error JSX. |
+| Codex | Pruebas | Generar casos de aceptación, adversarios y análisis de errores del modelo. | 37 pruebas automatizadas y tabla de diez casos de calidad. | Ajustado: se ejecutaron y revisaron; se descartaron afirmaciones sin evidencia. |
+| scikit-learn | Producto (IA) | Entrenar el modelo de boosting residual para estimar siete días. | `weekly-model-v3.joblib` con MAE 374,26 frente a 380,00 de referencia. | Ajustado: se declara mejora pequeña, no uniforme y no validada comercialmente. |
 
-Las propuestas requirieron correcciones. Se descartó presentar una serie sintética o un valor de respaldo como una predicción comercial. Se corrigió la confusión entre cargar resultados JSON y ejecutar el modelo. Durante la integración surgió un error de sintaxis JSX, detectado por la compilación y reparado antes de validar la interfaz. La revisión humana y las pruebas siguen siendo necesarias.
+**Mayor valor:** la asistencia con IA aportó más valor al detectar inconsistencias entre el objetivo declarado y el cálculo real. Predecir un registro posterior no equivale automáticamente a predecir siete días: fue necesario definir fechas y etiquetas. También ayudó a convertir requisitos en pruebas que permiten revisar si la aplicación cumple lo esperado.
 
-El proceso quedó organizado en tareas pequeñas con evidencia reproducible. El estudiante debe revisar los cambios y practicar su explicación: generar documentación no demuestra por sí mismo comprensión. La IA acelera borradores y búsqueda de errores, pero puede producir código o afirmaciones incorrectas.
+**Correcciones y descartes:** las propuestas requirieron correcciones. Se descartó presentar una serie sintética o un valor de respaldo como una predicción comercial. Se corrigió la confusión entre cargar resultados JSON y ejecutar el modelo. Durante la integración surgió un error de sintaxis JSX, detectado por la compilación y reparado antes de validar la interfaz. La revisión humana y las pruebas siguen siendo necesarias.
 
-La principal limitación del modelo es la distancia entre el conjunto histórico británico y el mercado donde se pretende usar TrendML. La mejora media frente a una referencia simple es pequeña; algunos productos presentan errores altos. Con más tiempo, incorporaría ventas propias autorizadas, disponibilidad de stock, evaluación temporal independiente, monitoreo y aislamiento por vendedor antes de una aplicación comercial.
+**Cambio en la forma de trabajar:** el proceso quedó organizado en tareas pequeñas con evidencia reproducible. El estudiante debe revisar los cambios y practicar su explicación: generar documentación no demuestra por sí mismo comprensión. La IA acelera borradores y búsqueda de errores, pero puede producir código o afirmaciones incorrectas.
+
+**Limitaciones y trabajo futuro:** la principal limitación del modelo es la distancia entre el conjunto histórico británico y el mercado donde se pretende usar TrendML. La mejora media frente a una referencia simple es pequeña; algunos productos presentan errores altos. Con más tiempo, incorporaría ventas propias autorizadas, disponibilidad de stock, evaluación temporal independiente, monitoreo y aislamiento por vendedor antes de una aplicación comercial.
 
 ## Entrega y reproducción
 
