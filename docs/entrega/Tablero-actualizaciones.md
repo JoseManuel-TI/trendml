@@ -11,7 +11,7 @@ El tablero existe en Notion: https://app.notion.com/p/28314a0e971e47468ef7160884
 | T03 · Revisar corrección semanal y cerrar integración | En proceso | Código y pruebas locales revisados; el conjunto final de cambios aún no está publicado. |
 | T08 · Revisar y ensayar exposición de puntos 1 a 5 | Pendiente | Guion y hoja de tiempos preparados. Falta pasada oral personal y confirmación del turno. |
 | T09 · Crear tablero y registrar primera captura | Finalizado | Tablero y captura inicial guardada. |
-| T10 · Revisar y publicar cambios en GitHub | Pendiente | Hay cambios y documentos locales sin commit/publicación. |
+| T10 · Revisar y publicar cambios en GitHub | Finalizado | Rama `codex/entrega-academica` publicada y sincronizada; últimos commits `1ab7f30`, `2d86e36` y `44ce255`. |
 | T13 · Capturar avances en dos sesiones posteriores | Finalizado | Tercera captura real del estado del 01/11/2026 guardada como `tablero-03.png` en `docs/entrega/`. Se documentó el estado actual; no se inventaron etapas históricas. |
 | Otras tareas | Según tablero | No cambiar estados sin evidencia de aceptación y pruebas. |
 
