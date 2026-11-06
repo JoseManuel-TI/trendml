@@ -146,6 +146,24 @@ Usé Notion con Backlog, Pendiente, En proceso y Finalizado, WIP máximo de una 
 
 Los datos son históricos británicos de 2010–2011, el dashboard usa datos sintéticos, no hay ventas propias ni aislamiento multiusuario, la mejora frente a la referencia es pequeña y no existe una prueba independiente; no es un pronóstico comercial. Con más tiempo incorporaría ventas propias autorizadas, stock, una validación temporal nueva, monitoreo, multiempresa y despliegue seguro.
 
+### ¿Qué variables usa el modelo?
+
+El artefacto v3 usa 13 variables calculadas solo con información pasada al corte:
+
+| Variable | Qué mide |
+| --- | --- |
+| `sales_7`, `sales_14`, `sales_28` | Unidades vendidas en los últimos 7, 14 y 28 días. |
+| `mean_week_56` | Promedio semanal de unidades en los últimos 56 días. |
+| `zero_fraction_28`, `zero_fraction_56` | Proporción de días sin ventas en 28 y 56 días. |
+| `relative_variability_28` | Variabilidad diaria de los últimos 28 días, normalizada. |
+| `recent_ratio` | Peso de la última semana frente al promedio de cuatro semanas. |
+| `trend_28_56` | Tendencia entre el promedio de 4 semanas y el de 8 semanas. |
+| `price` | Precio en la fecha de corte. |
+| `price_change_7` | Variación porcentual del precio en los últimos 7 días. |
+| `month`, `weekday` | Mes y día de la semana, para estacionalidad. |
+
+El objetivo no es una variable de entrada: es la suma de unidades de los siete días siguientes. El modelo no predice directamente las unidades; corrige el promedio de cuatro semanas (`baseline = sales_28 / 4`) y la salida final es `max(0, baseline + (baseline + 1) * corrección)`.
+
 ## Preparación antes de entrar a clase
 
 Ejecutar desde la carpeta trendml:
