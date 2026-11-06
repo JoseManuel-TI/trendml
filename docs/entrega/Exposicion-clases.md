@@ -26,6 +26,17 @@ Esta guía sirve para explicar el problema, demostrar la aplicación y defender 
 
 ## Demostración en vivo tres minutos
 
+### Ingreso a la aplicación
+
+Abrir una terminal y ejecutar desde la carpeta del proyecto:
+
+```bash
+cd /Users/josemanuel/Documents/Workspace/02_Desarrollo/proyectos/trendml
+bash scripts/start_academic.sh
+```
+
+Esperar a que aparezcan `Uvicorn running on http://127.0.0.1:8000` y `Ready` del frontend. Luego abrir http://localhost:3000/login y pulsar **Entrar como demo**. Si el modelo falta, ejecutar antes `bash scripts/train_academic.sh`. Si un puerto está ocupado, detener la instancia anterior antes de volver a iniciar.
+
 | Paso | Qué mostrar y decir |
 | --- | --- |
 | 1 Acceso | Abrir /login y pulsar Entrar como demo. La cuenta Pro local no necesita un pago. |
